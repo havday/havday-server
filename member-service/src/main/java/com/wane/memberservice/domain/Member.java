@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Member {
 
 	private Long id;
@@ -14,12 +13,28 @@ public class Member {
 
 	private MemberRole role;
 
-	public static Member createUserMember(Long id, String email) {
-		return new Member(id, email, MemberRole.USER);
+
+	private Member(Long id, String email, MemberRole role) {
+		this.id = id;
+		this.email = email;
+		this.role = role;
 	}
 
-	public static Member createAdminMember(Long id, String email) {
-		return new Member(id, email, MemberRole.ADMIN);
+	private Member(String email, MemberRole role) {
+		this(null, email, role);
+	}
+
+
+	public static Member of(Long id , String email, MemberRole role) {
+		return new Member(id, email, role);
+	}
+
+	public static Member createUserMember(String email) {
+		return new Member(email, MemberRole.USER);
+	}
+
+	public static Member createAdminMember(String email) {
+		return new Member(email, MemberRole.ADMIN);
 	}
 
 

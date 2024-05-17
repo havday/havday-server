@@ -11,7 +11,7 @@ class MemberTest {
 	@Test
 	void createUserMember() {
 		//given
-		Member sut = Member.createUserMember(1L, "test@email.com");
+		Member sut = Member.createUserMember("test@email.com");
 
 		//when
 		MemberRole sutRole = sut.getRole();
@@ -24,7 +24,7 @@ class MemberTest {
 	@Test
 	void createAdminMember() {
 		//given
-		Member sut = Member.createAdminMember(1L, "test@email.com");
+		Member sut = Member.createAdminMember("test@email.com");
 
 		//when
 		MemberRole sutRole = sut.getRole();
