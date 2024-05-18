@@ -10,9 +10,13 @@ public class MemberMapper {
 	public Member toDomainEntity(MemberJpaEntity jpaEntity) {
 		return Member.of(
 				jpaEntity.getId(),
+				jpaEntity.getName(),
 				jpaEntity.getEmail(),
+				jpaEntity.getPassword(),
+				jpaEntity.getPhoneNumber(),
+				jpaEntity.getPoint(),
+				jpaEntity.getAuthServiceType(),
 				jpaEntity.getMemberRole()
 		);
 	}
-
 }

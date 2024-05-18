@@ -1,13 +1,12 @@
 package com.wane.memberservice.adapter.out.persistence.jpa;
 
+import com.wane.memberservice.domain.AuthServiceType;
 import com.wane.memberservice.domain.MemberRole;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,16 +21,28 @@ class MemberJpaEntityRepositoryTest {
 	@Test
 	void findByEmail() {
 		//given
-		MemberJpaEntity memberEntity1 = new MemberJpaEntity("email", MemberRole.USER);
-		MemberJpaEntity memberEntity2 = new MemberJpaEntity("email2", MemberRole.USER);
-		repository.saveAll(List.of(memberEntity1, memberEntity2));
+		String findEmail = "email";
+
+		MemberJpaEntity memberEntity = createUserWithEmail(findEmail);
+		repository.save(memberEntity);
 
 		//when
-		Optional<MemberJpaEntity> optionalMemberEntity = repository.findByEmail("email");
+		Optional<MemberJpaEntity> optionalMemberEntity = repository.findByEmailAndMemberRole(findEmail, MemberRole.USER);
 
 		//then
 		assertThat(optionalMemberEntity).isPresent();
 	}
 
+	private MemberJpaEntity createUserWithEmail(String email) {
+				return new MemberJpaEntity(
+				"name",
+				email,
+				"",
+				"01012341234",
+				0,
+				AuthServiceType.KAKAO,
+				MemberRole.USER
+		);
+	}
 
 }

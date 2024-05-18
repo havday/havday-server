@@ -2,7 +2,7 @@ package com.wane.memberservice.application.port.out;
 
 import com.wane.memberservice.domain.Member;
 
-public interface RegisterMemberPort {
+public interface RegisterUserPort {
 
-	Member registerMember(Member member);
+	Member registerUser(Member member);
 }

@@ -1,7 +1,8 @@
 package com.wane.memberservice.adapter.out.persistence.jpa;
 
 import com.wane.memberservice.IntegrationTestSupport;
-import com.wane.memberservice.adapter.out.persistence.ExistMemberAdapter;
+import com.wane.memberservice.adapter.out.persistence.ExistUserAdapter;
+import com.wane.memberservice.domain.AuthServiceType;
 import com.wane.memberservice.domain.MemberRole;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 class ExistMemberAdapterTest extends IntegrationTestSupport {
 
 	@Autowired
-	private ExistMemberAdapter existMemberAdapter;
+	private ExistUserAdapter existMemberAdapter;
 
 	@Autowired
 	private MemberJpaEntityRepository memberRepository;
@@ -24,16 +25,15 @@ class ExistMemberAdapterTest extends IntegrationTestSupport {
 	void existMemberByEmail() {
 		//given
 		String email = "test@email.com";
-		memberRepository.save(
-				new MemberJpaEntity(email, MemberRole.USER)
-		);
+		saveMemberEntityWithEmail(email);
 
 		//when
-		boolean isMemberExists = existMemberAdapter.existMemberByEmail(email);
+		boolean isMemberExists = existMemberAdapter.existUserByEmail(email);
 
 		//then
 		Assertions.assertThat(isMemberExists).isTrue();
 	}
+
 
 	@DisplayName("member 가 존재하지 않으면 false 를 반환한다.")
 	@Test
@@ -41,15 +41,27 @@ class ExistMemberAdapterTest extends IntegrationTestSupport {
 		//given
 		String email = "test@email.com";
 		String notExistsEmail = "notExists@email.com";
-		memberRepository.save(
-				new MemberJpaEntity(email, MemberRole.USER)
-		);
+		saveMemberEntityWithEmail(email);
 
 		//when
-		boolean isMemberExists = existMemberAdapter.existMemberByEmail(notExistsEmail);
+		boolean isMemberExists = existMemberAdapter.existUserByEmail(notExistsEmail);
 
 		//then
 		Assertions.assertThat(isMemberExists).isFalse();
+	}
+
+	private void saveMemberEntityWithEmail(String email) {
+		memberRepository.save(
+				new MemberJpaEntity(
+						"name",
+						email,
+						"",
+						"01012341234",
+						0,
+						AuthServiceType.KAKAO,
+						MemberRole.USER
+				)
+		);
 	}
 
 }
