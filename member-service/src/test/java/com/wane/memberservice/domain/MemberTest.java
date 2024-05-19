@@ -69,4 +69,64 @@ class MemberTest {
 				.hasMessage("password는 필수 값 입니다.");
 	}
 
+	@DisplayName("주소를 추가할 수 있다.")
+	@Test
+	void addAddress() {
+	    //given
+		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO);
+
+		//when
+		user.addAddress("와니집", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", true);
+
+	    //then
+		assertThat(user.getAddresses()).hasSize(1);
+		assertThat(user.getAddresses().getFirst().getName()).isEqualTo("와니집");
+		assertThat(user.getAddresses().getFirst().getZipCode()).isEqualTo("12345");
+		assertThat(user.getAddresses().getFirst().getRoadName()).isEqualTo("분포로 114");
+		assertThat(user.getAddresses().getFirst().getDetail()).isEqualTo("엘지메트로시티");
+		assertThat(user.getAddresses().getFirst().getPhoneNumber()).isEqualTo("01023452345");
+		assertThat(user.getAddresses().getFirst().getRecipient()).isEqualTo("정경주");
+		assertThat(user.getAddresses().getFirst().isBaseAddress()).isTrue();
+	}
+
+	@DisplayName("첫번째로 추가되는 주소는 무조건 기본 배송지로 설정된다.")
+	@Test
+	void firstAddressIsBaseAddress() {
+	    //given
+		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO);
+
+		//when
+		user.addAddress("와니집", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", false);
+
+	    //then
+		assertThat(user.getAddresses()).hasSize(1);
+		assertThat(user.getAddresses().getFirst().getName()).isEqualTo("와니집");
+		assertThat(user.getAddresses().getFirst().getZipCode()).isEqualTo("12345");
+		assertThat(user.getAddresses().getFirst().getRoadName()).isEqualTo("분포로 114");
+		assertThat(user.getAddresses().getFirst().getDetail()).isEqualTo("엘지메트로시티");
+		assertThat(user.getAddresses().getFirst().getPhoneNumber()).isEqualTo("01023452345");
+		assertThat(user.getAddresses().getFirst().getRecipient()).isEqualTo("정경주");
+		assertThat(user.getAddresses().getFirst().isBaseAddress()).isTrue();
+	}
+
+	@DisplayName("기존 기본 주소지가 있어도 새로 기본주소지를 설정하면 기존 기본주소지는 일반 주소지가 된다.")
+	@Test
+	void lastAddressBecomeBaseAddress() {
+		//given
+		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO);
+		user.addAddress("기존기본주소", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", true);
+		//when
+		user.addAddress("새로운기본주소", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", true);
+
+		//then
+		assertThat(user.getAddresses()).hasSize(2);
+		assertThat(user.getAddresses().get(0).isBaseAddress()).isFalse();
+		assertThat(user.getAddresses().get(0).getName()).isEqualTo("기존기본주소");
+		assertThat(user.getAddresses().get(1).isBaseAddress()).isTrue();
+		assertThat(user.getAddresses().get(1).getName()).isEqualTo("새로운기본주소");
+	}
+
+
+
+
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class RegisterUserAdapter implements RegisterUserPort {
+public class RegisterUserPersistenceAdapter implements RegisterUserPort {
 
 	private final MemberJpaEntityRepository repository;
 	private final MemberMapper memberMapper;

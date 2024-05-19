@@ -20,18 +20,18 @@ public class RegisterUserService implements RegisterUserUseCase {
 	@Override
 	public void registerUser(RegisterUserCommand command) {
 
-		boolean isUserExists = existUserPort.existUserByEmail(command.email());
+		boolean isUserExists = existUserPort.existUserByEmail(command.getEmail());
 
 		if (isUserExists) {
 			throw new IllegalStateException("이미 가입된 회원 입니다.");
 		}
 
 		Member member = Member.createUser(
-				command.name(),
-				command.email(),
-				command.password(),
-				command.phoneNumber(),
-				command.authServiceType()
+				command.getName(),
+				command.getEmail(),
+				command.getPassword(),
+				command.getPhoneNumber(),
+				command.getAuthServiceType()
 		);
 		registerUserPort.registerUser(member);
 	}

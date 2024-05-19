@@ -1,8 +1,6 @@
-package com.wane.memberservice.adapter.in.web;
+package com.wane.memberservice.adapter.in.web.dto.request;
 
 import com.wane.memberservice.domain.AuthServiceType;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public record RegisterUserRequest(
 		String name,

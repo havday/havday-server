@@ -18,3 +18,17 @@ include::{snippets}/register-user/success/request-fields.adoc[]
 ==== Response
 
 include::{snippets}/register-user/success/http-response.adoc[]
+
+== 주소를 추가한다.
+
+=== Request
+
+include::{snippets}/save-address/success/http-request.adoc[]
+
+=== Request Fields
+
+include::{snippets}/save-address/success/request-fields.adoc[]
+
+==== Response
+
+include::{snippets}/save-address/success/http-response.adoc[]

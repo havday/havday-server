@@ -2,11 +2,13 @@ package com.wane.memberservice.application.port.in;
 
 import com.wane.memberservice.domain.AuthServiceType;
 import jakarta.validation.ConstraintViolationException;
+import lombok.Getter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Getter
 class RegisterUserCommandTest {
 
 	@DisplayName("이름이 비어있으면 예외를 던진다.")

@@ -1,5 +1,6 @@
 package com.wane.memberservice.adapter.in.web;
 
+import com.wane.memberservice.adapter.in.web.dto.request.RegisterUserRequest;
 import com.wane.memberservice.application.port.in.RegisterUserCommand;
 import com.wane.memberservice.application.port.in.RegisterUserUseCase;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,8 @@
-package com.wane.memberservice.adapter.out.persistence.jpa;
+package com.wane.memberservice.adapter.out.persistence;
 
 import com.wane.memberservice.IntegrationTestSupport;
-import com.wane.memberservice.adapter.out.persistence.ExistUserAdapter;
+import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntity;
+import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntityRepository;
 import com.wane.memberservice.domain.AuthServiceType;
 import com.wane.memberservice.domain.MemberRole;
 import org.assertj.core.api.Assertions;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 class ExistMemberAdapterTest extends IntegrationTestSupport {
 
 	@Autowired
-	private ExistUserAdapter existMemberAdapter;
+	private ExistUserPersistenceAdapter existMemberAdapter;
 
 	@Autowired
 	private MemberJpaEntityRepository memberRepository;

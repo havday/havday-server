@@ -1,9 +1,11 @@
 package com.wane.memberservice.adapter.in.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wane.memberservice.adapter.in.web.dto.request.RegisterUserRequest;
+import com.wane.memberservice.adapter.in.web.dto.request.SaveAddressRequest;
 import com.wane.memberservice.application.port.in.RegisterUserUseCase;
-import com.wane.memberservice.domain.AuthServiceType;
+import com.wane.memberservice.application.port.in.SaveAddressUseCase;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -12,16 +14,17 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = RegisterUserController.class)
+@WebMvcTest(controllers = SaveAddressController.class)
 @AutoConfigureRestDocs
-class RegisterUserControllerTest {
+class SaveAddressControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -30,30 +33,33 @@ class RegisterUserControllerTest {
 	private ObjectMapper objectMapper;
 
 	@MockBean
-	private RegisterUserUseCase registerUserUseCase;
+	private SaveAddressUseCase saveAddressUseCase;
 
-	//TODO. controller 의 displayname은 뭐가 적절할지 고민해보기
 	@Test
-	void registerUser() throws Exception {
+	void saveAddress() throws Exception {
+	    //given
+		SaveAddressRequest request = new SaveAddressRequest(1L, "재완집", "수취자", "12345", "도로명 주소", "상세 주소", "01012341234", true);
 
-		//given
-		RegisterUserRequest request = new RegisterUserRequest("박재완", "wan2daaa@gmail.com", "", "01012341234", AuthServiceType.KAKAO);
-
-		//when //then
-		mockMvc.perform(post("/api/v1/users")
+		//when & then
+		mockMvc.perform(post("/api/v1/addresses")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(request)))
 				.andDo(print())
 				.andExpect(status().isCreated())
-				.andDo(document("register-user/success",
+				.andDo(document("save-address/success",
 						requestFields(
-								fieldWithPath("name").description("성명"),
-								fieldWithPath("email").description("이메일"),
-								fieldWithPath("password").description("password (빈값을 넣으시면 됩니다. \"\")").optional(),
+								fieldWithPath("memberId").ignored(),
+								fieldWithPath("name").description("배송자명"),
+								fieldWithPath("recipient").description("수취인"),
+								fieldWithPath("zipCode").description("우편번호"),
+								fieldWithPath("roadName").description("도로명 주소"),
+								fieldWithPath("detail").description("상세 주소"),
 								fieldWithPath("phoneNumber").description("전화번호"),
-								fieldWithPath("authServiceType").description("oauth 인증 받은 서버 (KAKAO, NAVER) 중 하나입니다.")
-						)));
+								fieldWithPath("isBaseAddress").description("기본 배송지 인지 (true, false)"))
+				));
+
 	}
+
 
 
 }

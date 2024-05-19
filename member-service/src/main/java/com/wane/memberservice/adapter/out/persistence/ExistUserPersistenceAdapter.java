@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
-public class ExistUserAdapter implements ExistUserPort {
+public class ExistUserPersistenceAdapter implements ExistUserPort {
 
 	private final MemberJpaEntityRepository repository;
 
