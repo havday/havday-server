@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface ProductEntityQuerydsl {
 
-	List<ProductEntity> findProductsWithCursor(Long productId, int limit);
+	List<ProductEntity> findProductsOrderByIdAscWithCursor(Long productId, int limit);
 }

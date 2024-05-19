@@ -32,7 +32,7 @@ class ProductEntityRepositoryTest {
 		productRepository.saveAll(List.of(product1, product2, product3));
 
 		//when
-		List<ProductEntity> products = productRepository.findProductsWithCursor(0L, 2);
+		List<ProductEntity> products = productRepository.findProductsOrderByIdAscWithCursor(0L, 2);
 
 		//then
 		assertThat(products).hasSize(2);

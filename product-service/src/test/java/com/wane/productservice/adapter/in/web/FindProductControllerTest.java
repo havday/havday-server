@@ -48,8 +48,8 @@ class FindProductControllerTest {
 				VISOR - 7
 				DEPTH - 15.5""";
 
-		Product product1 = Product.of(1L, "신발", 10000, "상품설명", sizeDescription, 100, "");
-		Product product2 = Product.of(2L, "모자", 39000, "상품설명", sizeDescription, 50, "");
+		Product product1 = Product.forMain(1L, "신발", 10000, "https://wan2daaa.com/image.png");
+		Product product2 = Product.forMain(2L, "모자", 39000,  "https://wan2daaa.com/image2.png");
 
 		given(findProductsUseCase.findProductsWithCursor(anyLong(), anyInt()))
 				.willReturn(new CursorResponse<>(true, List.of(product1, product2)));
@@ -84,8 +84,8 @@ class FindProductControllerTest {
 				VISOR - 7
 				DEPTH - 15.5""";
 
-		Product product1 = Product.of(1L, "신발", 10000, "상품설명", sizeDescription, 100, "");
-		Product product2 = Product.of(2L, "모자", 39000, "상품설명", sizeDescription, 50, "");
+		Product product1 = Product.forMain(1L, "신발", 10000, "https://wan2daaa.com/image.png");
+		Product product2 = Product.forMain(2L, "모자", 39000,  "https://wan2daaa.com/image2.png");
 
 		given(findProductsUseCase.findProductsWithCursor(anyLong(), anyInt()))
 				.willReturn(new CursorResponse<>(true, List.of(product1, product2)));

@@ -10,6 +10,6 @@ public record FindProduct(
 ) {
 
 	public static FindProduct fromDomainEntity(Product product) {
-		return new FindProduct(product.getId(), product.getName(), product.getPrice(), product.getImageUrl());
+		return new FindProduct(product.getId(), product.getName(), product.getPrice(), product.getMainImageUrl());
 	}
 }

@@ -1,9 +1,10 @@
 package com.wane.productservice.application.port.out;
 
-import com.wane.productservice.common.CursorResponse;
 import com.wane.productservice.domain.Product;
+
+import java.util.List;
 
 public interface FindProductsPort {
 
-	CursorResponse<Product> findProductsWithCursor(Long productId, int size);
+	List<Product> findProductsOrderByIdAscWithCursor(Long productId, int size);
 }

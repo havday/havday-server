@@ -7,14 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductMapper {
 
-	public Product toDomainEntity(ProductEntity productEntity) {
-		return Product.of(
+	public Product toDomainEntityForMain(ProductEntity productEntity) {
+		return Product.forMain(
 				productEntity.getId(),
 				productEntity.getName(),
 				productEntity.getPrice(),
-				productEntity.getMaterialDescription(),
-				productEntity.getSizeDescription(),
-				productEntity.getQuantity(),
 				productEntity.getImageUrl()
 		);
 	}

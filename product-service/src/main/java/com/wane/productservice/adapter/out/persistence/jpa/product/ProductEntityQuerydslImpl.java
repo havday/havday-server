@@ -13,7 +13,7 @@ public class ProductEntityQuerydslImpl implements ProductEntityQuerydsl {
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public List<ProductEntity> findProductsWithCursor(Long productId, int limit) {
+	public List<ProductEntity> findProductsOrderByIdAscWithCursor(Long productId, int limit) {
 		return queryFactory.selectFrom(productEntity)
 				.where(productEntity.id.gt(productId))
 				.orderBy(productEntity.id.asc())
