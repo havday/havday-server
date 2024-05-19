@@ -52,6 +52,7 @@ class ProductEntityRepositoryTest {
 
 						DEPTH - 15.5""",
 				100,
+				"",
 				null
 		);
 	}

@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = FindProductsController.class)
 @AutoConfigureRestDocs
-class FindProductsControllerTest {
+class FindProductControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -43,18 +43,13 @@ class FindProductsControllerTest {
 	@Test
 	void findProducts() throws Exception {
 		//given
+		String sizeDescription = """
+				SIZE - FREE
+				VISOR - 7
+				DEPTH - 15.5""";
 
-		Product product1 = Product.of(1L, "신발", 10000, "상품설명", """
-						SIZE - FREE
-						VISOR - 7
-						DEPTH - 15.5
-						""",
-				100);
-		Product product2 = Product.of(2L, "모자", 39000, "상품설명", """
-						SIZE - FREE
-						VISOR - 7
-						DEPTH - 15.5""",
-				50);
+		Product product1 = Product.of(1L, "신발", 10000, "상품설명", sizeDescription, 100, "");
+		Product product2 = Product.of(2L, "모자", 39000, "상품설명", sizeDescription, 50, "");
 
 		given(findProductsUseCase.findProductsWithCursor(anyLong(), anyInt()))
 				.willReturn(new CursorResponse<>(true, List.of(product1, product2)));
@@ -72,12 +67,11 @@ class FindProductsControllerTest {
 						),
 						responseFields(
 								fieldWithPath("hasNext").description("다음 결과가 있는지 true false"),
-								fieldWithPath("data[].id").description("상품 id "),
-								fieldWithPath("data[].name").description("상품 명"),
-								fieldWithPath("data[].price").description("상품 가격"),
-								fieldWithPath("data[].materialDescription").description("상품 설명"),
-								fieldWithPath("data[].sizeDescription").description("상품 사이즈 설명"),
-								fieldWithPath("data[].quantity").ignored()
+								fieldWithPath("products[].id").description("상품 id "),
+								fieldWithPath("products[].name").description("상품 명"),
+								fieldWithPath("products[].price").description("상품 가격"),
+								fieldWithPath("products[].imageUrl").description("상품 이미지 주소")
+
 						)));
 	}
 
@@ -85,18 +79,13 @@ class FindProductsControllerTest {
 	@Test
 	void findProductsWithoutParameters() throws Exception {
 		//given
+		String sizeDescription = """
+				SIZE - FREE
+				VISOR - 7
+				DEPTH - 15.5""";
 
-		Product product1 = Product.of(1L, "신발", 10000, "상품설명", """
-						SIZE - FREE
-						VISOR - 7
-						DEPTH - 15.5
-						""",
-				100);
-		Product product2 = Product.of(2L, "모자", 39000, "상품설명", """
-						SIZE - FREE
-						VISOR - 7
-						DEPTH - 15.5""",
-				50);
+		Product product1 = Product.of(1L, "신발", 10000, "상품설명", sizeDescription, 100, "");
+		Product product2 = Product.of(2L, "모자", 39000, "상품설명", sizeDescription, 50, "");
 
 		given(findProductsUseCase.findProductsWithCursor(anyLong(), anyInt()))
 				.willReturn(new CursorResponse<>(true, List.of(product1, product2)));
@@ -108,12 +97,10 @@ class FindProductsControllerTest {
 				.andDo(document("find-products-without-query-parameters/success",
 						responseFields(
 								fieldWithPath("hasNext").description("다음 결과가 있는지 true false"),
-								fieldWithPath("data[].id").description("상품 id "),
-								fieldWithPath("data[].name").description("상품 명"),
-								fieldWithPath("data[].price").description("상품 가격"),
-								fieldWithPath("data[].materialDescription").description("상품 설명"),
-								fieldWithPath("data[].sizeDescription").description("상품 사이즈 설명"),
-								fieldWithPath("data[].quantity").ignored()
+								fieldWithPath("products[].id").description("상품 id "),
+								fieldWithPath("products[].name").description("상품 명"),
+								fieldWithPath("products[].price").description("상품 가격"),
+								fieldWithPath("products[].imageUrl").description("상품 이미지 주소")
 						)));
 	}
 

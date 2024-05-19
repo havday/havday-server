@@ -32,6 +32,8 @@ public class ProductEntity {
 
 	private int quantity;
 
+	private String imageUrl;
+
 	@OneToMany(mappedBy = "product", orphanRemoval = true, cascade = CascadeType.ALL)
 	private Set<ProductCategoryEntity> categories = new LinkedHashSet<>();
 
@@ -44,12 +46,13 @@ public class ProductEntity {
 		}
 	}
 
-	public ProductEntity(String name, int price, String materialDescription, String sizeDescription, int quantity, Set<ProductCategoryEntity> categories) {
+	public ProductEntity(String name, int price, String materialDescription, String sizeDescription, int quantity, String imageUrl, Set<ProductCategoryEntity> categories) {
 		this.name = name;
 		this.price = price;
 		this.materialDescription = materialDescription;
 		this.sizeDescription = sizeDescription;
 		this.quantity = quantity;
+		this.imageUrl = imageUrl;
 		this.categories = categories;
 	}
 }
