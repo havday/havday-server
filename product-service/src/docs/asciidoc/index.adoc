@@ -1,0 +1,41 @@
+# API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+
+== 상품 리스트를 가져온다.
+
+=== Request
+
+include::{snippets}/find-products/success/http-request.adoc[]
+
+==== Query Parameters
+
+include::{snippets}/find-products/success/query-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/find-products/success/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/find-products/success/response-fields.adoc[]
+
+== 상품리스트를 가져올때 Query Parameter 가 없어도 된다.
+
+- 기본값으로 productId: 1, size: 9 로 적용된다.
+
+
+=== Request
+
+include::{snippets}/find-products-without-query-parameters/success/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/find-products-without-query-parameters/success/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/find-products-without-query-parameters/success/response-fields.adoc[]
