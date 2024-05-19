@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,10 +33,15 @@ public class ProductEntity {
 
 	private int quantity;
 
-	private String imageUrl;
+	private String mainImageUrl;
 
 	@OneToMany(mappedBy = "product", orphanRemoval = true, cascade = CascadeType.ALL)
 	private Set<ProductCategoryEntity> categories = new LinkedHashSet<>();
+
+	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_id")
+	private List<ProductDetailImageEntity> productDetailImages = new ArrayList<>();
+
 
 	public void setCategories(List<ProductCategoryEntity> list) {
 		for (ProductCategoryEntity productCategory : list) {
@@ -46,13 +52,14 @@ public class ProductEntity {
 		}
 	}
 
-	public ProductEntity(String name, int price, String materialDescription, String sizeDescription, int quantity, String imageUrl, Set<ProductCategoryEntity> categories) {
+	public ProductEntity(String name, int price, String materialDescription, String sizeDescription, int quantity, String mainImageUrl, Set<ProductCategoryEntity> categories, List<ProductDetailImageEntity> productDetailImages) {
 		this.name = name;
 		this.price = price;
 		this.materialDescription = materialDescription;
 		this.sizeDescription = sizeDescription;
 		this.quantity = quantity;
-		this.imageUrl = imageUrl;
+		this.mainImageUrl = mainImageUrl;
 		this.categories = categories;
+		this.productDetailImages = productDetailImages;
 	}
 }

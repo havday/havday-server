@@ -6,9 +6,11 @@ import com.wane.productservice.common.CursorResponse;
 import com.wane.productservice.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class FindProductsService implements FindProductsUseCase {

@@ -17,7 +17,7 @@ import static org.mockito.BDDMockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class FindProductsServiceTest {
+class FindMainProductsServiceTest {
 
 	@Mock
 	private FindProductsPort findProductsPort;

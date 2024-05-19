@@ -2,8 +2,8 @@ package com.wane.productservice.adapter.in.web.dto.response;
 
 import java.util.List;
 
-public record FindProductsResponse(
+public record FindMainProductsResponse(
 		boolean hasNext,
-		List<FindProduct> products
+		List<FindMainProduct> products
 ) {
 }
