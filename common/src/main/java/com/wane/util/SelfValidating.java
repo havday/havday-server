@@ -1,4 +1,4 @@
-package com.wane.apigateway.util;
+package com.wane.util;
 
 import jakarta.validation.*;
 
