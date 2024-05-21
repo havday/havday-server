@@ -19,6 +19,7 @@ public class MemberMapper {
 				jpaEntity.getPoint(),
 				jpaEntity.getAuthServiceType(),
 				jpaEntity.getMemberRole(),
+				jpaEntity.getAuthId(),
 				jpaEntity.getAddresses().stream().map(this::toDomainEntity).toList()
 		);
 	}
@@ -46,7 +47,8 @@ public class MemberMapper {
 				member.getPoint(),
 				member.getAuthServiceType(),
 				member.getRole(),
-				member.getAddresses().stream().map(this::toJpaEntity).toList()
+				member.getAddresses().stream().map(this::toJpaEntity).toList(),
+				member.getAuthId()
 		);
 	}
 

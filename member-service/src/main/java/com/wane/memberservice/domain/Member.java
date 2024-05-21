@@ -22,11 +22,13 @@ public class Member {
 
 	private AuthServiceType authServiceType;
 
+	private String authId;
+
 	private MemberRole role;
 
 	private List<Address> addresses = new ArrayList<>();
 
-	private Member(Long id, String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole role, List<Address> addresses) {
+	private Member(Long id, String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole role, String authId, List<Address> addresses) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -35,10 +37,11 @@ public class Member {
 		this.point = point;
 		this.authServiceType = authServiceType;
 		this.role = role;
+		this.authId = authId;
 		this.addresses = addresses;
 	}
 
-	private Member(String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole role) {
+	private Member(String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole role, String authId) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -46,17 +49,22 @@ public class Member {
 		this.point = point;
 		this.authServiceType = authServiceType;
 		this.role = role;
+		this.authId = authId;
 	}
 
-	public static Member create(Long id, String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole role, List<Address> addresses) {
-		return new Member(id, name, email, password, phoneNumber, point, authServiceType, role, addresses);
+	public static Member create(Long id, String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole role, String authId, List<Address> addresses) {
+		return new Member(id, name, email, password, phoneNumber, point, authServiceType, role, authId, addresses);
 	}
 
-	public static Member createUser(String name, String email, String password, String phoneNumber, AuthServiceType authServiceType) {
+	public static Member createUser(String name, String email, String password, String phoneNumber, AuthServiceType authServiceType, String authId) {
 		if (authServiceType == AuthServiceType.NONE) {
 			throw new IllegalArgumentException("회원은 oauth type이 있어야 합니다.");
 		}
-		return new Member(name, email, password, phoneNumber, 0, authServiceType, MemberRole.USER);
+
+		if (authId.isBlank()) {
+			throw new IllegalArgumentException("authId는 필수 값 입니다.");
+		}
+		return new Member(name, email, password, phoneNumber, 0, authServiceType, MemberRole.USER, authId);
 	}
 
 
@@ -64,7 +72,7 @@ public class Member {
 		if (password.isEmpty()) {
 			throw new IllegalArgumentException("password는 필수 값 입니다.");
 		}
-		return new Member(name, email, password, phoneNumber, 0, AuthServiceType.NONE, MemberRole.ADMIN);
+		return new Member(name, email, password, phoneNumber, 0, AuthServiceType.NONE, MemberRole.ADMIN, "");
 	}
 
 	public void addAddress(

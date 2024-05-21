@@ -24,7 +24,8 @@ public class RegisterUserPersistenceAdapter implements RegisterUserPort {
 						member.getPhoneNumber(),
 						member.getPoint(),
 						member.getAuthServiceType(),
-						member.getRole()
+						member.getRole(),
+						member.getAuthId()
 				)
 		);
 

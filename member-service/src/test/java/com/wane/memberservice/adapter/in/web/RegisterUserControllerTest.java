@@ -37,7 +37,7 @@ class RegisterUserControllerTest {
 	void registerUser() throws Exception {
 
 		//given
-		RegisterUserRequest request = new RegisterUserRequest("박재완", "wan2daaa@gmail.com", "", "01012341234", AuthServiceType.KAKAO);
+		RegisterUserRequest request = new RegisterUserRequest("박재완", "wan2daaa@gmail.com", "", "01012341234", AuthServiceType.KAKAO, "authId");
 
 		//when //then
 		mockMvc.perform(post("/api/v1/users")
@@ -51,7 +51,8 @@ class RegisterUserControllerTest {
 								fieldWithPath("email").description("이메일"),
 								fieldWithPath("password").description("password (빈값을 넣으시면 됩니다. \"\")").optional(),
 								fieldWithPath("phoneNumber").description("전화번호"),
-								fieldWithPath("authServiceType").description("oauth 인증 받은 서버 (KAKAO, NAVER) 중 하나입니다.")
+								fieldWithPath("authServiceType").description("oauth 인증 받은 서버 (KAKAO, NAVER) 중 하나입니다."),
+								fieldWithPath("authId").description("authId")
 						)));
 	}
 

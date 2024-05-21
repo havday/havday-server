@@ -1,5 +1,7 @@
 package com.wane.memberservice.application.port.service;
 
+import com.wane.exception.CustomException;
+import com.wane.exception.ErrorCode;
 import com.wane.memberservice.application.port.in.RegisterUserCommand;
 import com.wane.memberservice.application.port.in.RegisterUserUseCase;
 import com.wane.memberservice.application.port.out.ExistUserPort;
@@ -23,7 +25,7 @@ public class RegisterUserService implements RegisterUserUseCase {
 		boolean isUserExists = existUserPort.existUserByEmail(command.getEmail());
 
 		if (isUserExists) {
-			throw new IllegalStateException("이미 가입된 회원 입니다.");
+			throw new CustomException(ErrorCode.MEMBER_ALREADY_REGISTERED);
 		}
 
 		Member member = Member.createUser(
@@ -31,7 +33,8 @@ public class RegisterUserService implements RegisterUserUseCase {
 				command.getEmail(),
 				command.getPassword(),
 				command.getPhoneNumber(),
-				command.getAuthServiceType()
+				command.getAuthServiceType(),
+				command.getAuthId()
 		);
 		registerUserPort.registerUser(member);
 	}

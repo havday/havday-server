@@ -27,7 +27,7 @@ class SaveMemberPersistenceAdapterTest extends IntegrationTestSupport {
 	@Test
 	void saveMember() {
 		//given
-		Member member = Member.createUser("이름", "email", "password", "01012341234", AuthServiceType.KAKAO);
+		Member member = Member.createUser("이름", "email", "password", "01012341234", AuthServiceType.KAKAO, "authId");
 		member.addAddress("재완집", "01233", "도로명 주소", "상세 주소", "01012341234", "수취인", false);
 		member.addAddress("남의집", "12300", "도로명 주소2", "상세 주소2", "01012311234", "수취인2", true);
 

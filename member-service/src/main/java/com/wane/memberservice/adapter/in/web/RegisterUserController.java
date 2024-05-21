@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class RegisterUserController {
@@ -28,7 +27,8 @@ public class RegisterUserController {
 				request.email(),
 				request.password(),
 				request.phoneNumber(),
-				request.authServiceType()
+				request.authServiceType(),
+				request.authId()
 		);
 
 		registerUserUseCase.registerUser(command);

@@ -7,6 +7,7 @@ public record RegisterUserRequest(
 		String email,
 		String password,
 		String phoneNumber,
-		AuthServiceType authServiceType
+		AuthServiceType authServiceType,
+		String authId
 ) {
 }

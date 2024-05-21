@@ -41,7 +41,8 @@ class MemberJpaEntityRepositoryTest {
 				"01012341234",
 				0,
 				AuthServiceType.KAKAO,
-				MemberRole.USER
+				MemberRole.USER,
+						"authId"
 		);
 	}
 

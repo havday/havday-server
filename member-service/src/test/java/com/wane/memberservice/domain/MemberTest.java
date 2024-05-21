@@ -14,10 +14,11 @@ class MemberTest {
 		//given
 		Member sut = Member.createUser(
 				"이름",
-				"test@email.com",
+				"user@email.com",
 				"password",
 				"01012341234",
-				AuthServiceType.KAKAO
+				AuthServiceType.KAKAO,
+				"authId"
 		);
 
 		//when
@@ -32,13 +33,29 @@ class MemberTest {
 	void createUserWithNone() {
 		assertThatThrownBy(() -> Member.createUser(
 				"이름",
-				"admin@email.com",
+				"user@email.com",
 				"password",
 				"01012341234",
-				AuthServiceType.NONE
+				AuthServiceType.NONE,
+				"authId"
 		))
 				.isInstanceOf(IllegalArgumentException.class)
 				.hasMessage("회원은 oauth type이 있어야 합니다.");
+	}
+
+	@DisplayName("유저는 authId가 필수 값이다.")
+	@Test
+	void createUserWithEmptyAuthId() {
+		assertThatThrownBy(() -> Member.createUser(
+				"이름",
+				"user@email.com",
+				"password",
+				"01012341234",
+				AuthServiceType.KAKAO,
+				""
+		))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("authId는 필수 값 입니다.");
 	}
 
 	@DisplayName("회원은 Admin 역할을 가질 수 있다.")
@@ -73,7 +90,7 @@ class MemberTest {
 	@Test
 	void addAddress() {
 	    //given
-		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO);
+		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO, "authId");
 
 		//when
 		user.addAddress("와니집", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", true);
@@ -93,7 +110,7 @@ class MemberTest {
 	@Test
 	void firstAddressIsBaseAddress() {
 	    //given
-		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO);
+		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO, "authId");
 
 		//when
 		user.addAddress("와니집", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", false);
@@ -113,7 +130,7 @@ class MemberTest {
 	@Test
 	void lastAddressBecomeBaseAddress() {
 		//given
-		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO);
+		Member user = Member.createUser("이름", "email", "", "01012341234", AuthServiceType.KAKAO, "authId");
 		user.addAddress("기존기본주소", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", true);
 		//when
 		user.addAddress("새로운기본주소", "12345", "분포로 114", "엘지메트로시티", "01023452345", "정경주", true);

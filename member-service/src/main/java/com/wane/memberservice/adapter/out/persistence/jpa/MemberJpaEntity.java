@@ -36,6 +36,8 @@ public class MemberJpaEntity {
 	@Enumerated(EnumType.STRING)
 	private AuthServiceType authServiceType;
 
+	private String authId;
+
 	@Column(nullable = false)
 	private MemberRole memberRole;
 
@@ -43,7 +45,7 @@ public class MemberJpaEntity {
 	@JoinColumn(name = "member_id")
 	private List<AddressJpaEntity> addresses = new ArrayList<>();
 
-	public MemberJpaEntity(String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole memberRole) {
+	public MemberJpaEntity(String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole memberRole, String authId) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -51,9 +53,10 @@ public class MemberJpaEntity {
 		this.point = point;
 		this.authServiceType = authServiceType;
 		this.memberRole = memberRole;
+		this.authId = authId;
 	}
 
-	public MemberJpaEntity(Long id, String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole memberRole, List<AddressJpaEntity> addresses) {
+	public MemberJpaEntity(Long id, String name, String email, String password, String phoneNumber, int point, AuthServiceType authServiceType, MemberRole memberRole, List<AddressJpaEntity> addresses, String authId) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -63,5 +66,6 @@ public class MemberJpaEntity {
 		this.authServiceType = authServiceType;
 		this.memberRole = memberRole;
 		this.addresses = addresses;
+		this.authId = authId;
 	}
 }

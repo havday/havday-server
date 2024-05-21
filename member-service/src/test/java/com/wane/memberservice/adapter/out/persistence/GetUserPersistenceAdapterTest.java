@@ -31,7 +31,7 @@ class GetUserPersistenceAdapterTest extends IntegrationTestSupport {
 	@Test
 	void getUser() {
 	    //given
-		MemberJpaEntity memberJpaEntity = new MemberJpaEntity("이름", "email", "password", "01012341234", 1000, AuthServiceType.KAKAO, MemberRole.USER);
+		MemberJpaEntity memberJpaEntity = new MemberJpaEntity("이름", "email", "password", "01012341234", 1000, AuthServiceType.KAKAO, MemberRole.USER, "authId");
 		memberRepository.save(memberJpaEntity);
 
 	    //when
@@ -46,6 +46,7 @@ class GetUserPersistenceAdapterTest extends IntegrationTestSupport {
 		assertThat(sut.getPoint()).isEqualTo(1000);
 		assertThat(sut.getAuthServiceType()).isEqualTo(AuthServiceType.KAKAO);
 		assertThat(sut.getRole()).isEqualTo(MemberRole.USER);
+		assertThat(sut.getAuthId()).isEqualTo("authId");
 		assertThat(sut.getAddresses()).isEqualTo(new ArrayList<>());
 	}
 

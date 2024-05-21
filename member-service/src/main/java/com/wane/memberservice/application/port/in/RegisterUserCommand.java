@@ -22,8 +22,10 @@ public class RegisterUserCommand extends SelfValidating<RegisterUserCommand> {
 	private final String phoneNumber;
 	@NotNull(message = "어느 oauth로 인증한지 명시해야 합니다.")
 	private final AuthServiceType authServiceType;
+	@NotNull(message = "authId를 명시해야 합니다.")
+	private final String authId;
 
-	public RegisterUserCommand(String name, String email, String password, String phoneNumber, AuthServiceType authServiceType) {
+	public RegisterUserCommand(String name, String email, String password, String phoneNumber, AuthServiceType authServiceType, String authId) {
 		if (authServiceType == AuthServiceType.NONE) {
 			throw new IllegalArgumentException("어떤 oauth로 인증한지 명시해야 합니다.");
 		}
@@ -33,6 +35,7 @@ public class RegisterUserCommand extends SelfValidating<RegisterUserCommand> {
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.authServiceType = authServiceType;
+		this.authId = authId;
 
 		this.validateSelf();
 	}

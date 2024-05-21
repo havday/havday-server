@@ -14,37 +14,37 @@ class RegisterUserCommandTest {
 	@DisplayName("이름이 비어있으면 예외를 던진다.")
 	@Test
 	void throwExceptionWhenNameIsEmpty() {
-		assertThatThrownBy(() -> new RegisterUserCommand("", "test@email.com", "password", "01012341234", AuthServiceType.KAKAO))
+		assertThatThrownBy(() -> new RegisterUserCommand("", "test@email.com", "password", "01012341234", AuthServiceType.KAKAO, "authId"))
 				.isInstanceOf(ConstraintViolationException.class);
-		assertThatThrownBy(() -> new RegisterUserCommand("", "test@email.com", "password", "01012341234", AuthServiceType.KAKAO))
+		assertThatThrownBy(() -> new RegisterUserCommand("", "test@email.com", "password", "01012341234", AuthServiceType.KAKAO, "authId"))
 				.isInstanceOf(ConstraintViolationException.class);
 	}
 
 	@DisplayName("이메일이 비어있으면 예외를 던진다.")
 	@Test
 	void throwExceptionWhenEmailIsEmpty() {
-		assertThatThrownBy(() -> new RegisterUserCommand("이름","", "password", "01012341234", AuthServiceType.KAKAO))
+		assertThatThrownBy(() -> new RegisterUserCommand("이름","", "password", "01012341234", AuthServiceType.KAKAO, "authId"))
 				.isInstanceOf(ConstraintViolationException.class);
-		assertThatThrownBy(() -> new RegisterUserCommand("이름",null, "password", "01012341234", AuthServiceType.KAKAO))
+		assertThatThrownBy(() -> new RegisterUserCommand("이름",null, "password", "01012341234", AuthServiceType.KAKAO, "authId"))
 				.isInstanceOf(ConstraintViolationException.class);
 	}
 
 	@DisplayName("휴대폰 번호가 비어있으면 예외를 던진다.")
 	@Test
 	void throwExceptionWhenPhoneNumberIsEmpty() {
-		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", "", AuthServiceType.KAKAO))
+		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", "", AuthServiceType.KAKAO, "authId"))
 				.isInstanceOf(ConstraintViolationException.class);
-		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", null, AuthServiceType.KAKAO))
+		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", null, AuthServiceType.KAKAO, "authId"))
 				.isInstanceOf(ConstraintViolationException.class);
 	}
 
 	@DisplayName("어떤 oauth 에서 인증한지에 대한 정보가 없으면 에외를 던진다.")
 	@Test
 	void throwExceptionWhenAuthServiceTypeIsNoneOrNull() {
-		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", "01012341234", AuthServiceType.NONE))
+		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", "01012341234", AuthServiceType.NONE, "authId"))
 				.isInstanceOf(IllegalArgumentException.class);
 
-		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", "01012341234", null))
+		assertThatThrownBy(() -> new RegisterUserCommand("이름","test@email.com", "password", "01012341234", null, "authId"))
 				.isInstanceOf(ConstraintViolationException.class);
 	}
 
