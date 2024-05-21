@@ -28,9 +28,10 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 }
 
-tasks.withType(KotlinCompile) {
+tasks.withType(KotlinCompile).configureEach {
     kotlinOptions {
         freeCompilerArgs += '-Xjsr305=strict'
         jvmTarget = '21'
     }
+
 }
