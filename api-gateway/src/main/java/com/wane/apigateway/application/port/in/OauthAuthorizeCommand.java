@@ -1,6 +1,6 @@
 package com.wane.apigateway.application.port.in;
 
-import com.wane.apigateway.util.SelfValidating;
+import com.wane.util.SelfValidating;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 

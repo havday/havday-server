@@ -26,7 +26,7 @@ public class NaverOauthAuthorizeService implements OauthAuthorizePort {
 
 		String oauthUserId = serverPort.getOauthUserId(oauthAccessToken.accessToken());
 
-		Long memberId = getMemberByOauthIdPort.getMemberIdByOauthIdOrElseZero(oauthUserId);
+		Long memberId = getMemberByOauthIdPort.getMemberIdByOauthTypeAndOauthIdOrElseZero(oauthUserId, OauthServerType.NAVER);
 
 
 		if (memberId == 0) {

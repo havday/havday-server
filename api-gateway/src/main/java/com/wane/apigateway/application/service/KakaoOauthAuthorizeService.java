@@ -26,7 +26,7 @@ public class KakaoOauthAuthorizeService implements OauthAuthorizePort {
 
 		String oauthUserId = oauthServerPort.getOauthUserId(oauthAccessToken.accessToken());
 
-		Long memberId = getMemberByOauthIdPort.getMemberIdByOauthIdOrElseZero(oauthUserId);
+		Long memberId = getMemberByOauthIdPort.getMemberIdByOauthTypeAndOauthIdOrElseZero(oauthUserId, OauthServerType.KAKAO);
 
 		if (memberId == 0) {
 			return AuthorizeData.createMemberExists(
