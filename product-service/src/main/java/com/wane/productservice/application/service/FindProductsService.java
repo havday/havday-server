@@ -24,4 +24,9 @@ public class FindProductsService implements FindProductsUseCase {
 
 		return new CursorResponse<>(products.size() == size, products);
 	}
+
+	@Override
+	public List<Product> findProductsByProductIdsIn(List<Long> productIds) {
+		return findProductsPort.findProductsByProductIdIn(productIds);
+	}
 }

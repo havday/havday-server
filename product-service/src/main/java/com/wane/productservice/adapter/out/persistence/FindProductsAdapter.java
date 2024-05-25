@@ -14,17 +14,27 @@ import java.util.List;
 @Repository
 public class FindProductsAdapter implements FindProductsPort {
 
-	private final ProductEntityRepository productRepository;
+    private final ProductEntityRepository productRepository;
+    private final ProductMapper productMapper;
 
-	@Override
-	public List<Product> findProductsOrderByIdAscWithCursor(Long productId, int size) {
+    @Override
+    public List<Product> findProductsOrderByIdAscWithCursor(Long productId, int size) {
 
-		List<ProductEntity> productEntityList = productRepository.findProductsOrderByIdAscWithCursor(productId, size);
+        List<ProductEntity> productEntityList = productRepository.findProductsOrderByIdAscWithCursor(productId, size);
 
-		return productEntityList.stream()
-				.map(ProductMapper::toDomainEntityForMain)
-				.toList();
+        return productEntityList.stream()
+                .map(productMapper::toDomainEntityForMain)
+                .toList();
 
-	}
+    }
+
+    @Override
+    public List<Product> findProductsByProductIdIn(List<Long> productIds) {
+        List<ProductEntity> productEntityList = productRepository.findAllByIdIn(productIds);
+
+        return productEntityList.stream()
+                .map(productMapper::toDomainEntityForMain)
+                .toList();
+    }
 
 }

@@ -1,10 +1,7 @@
 package com.wane.productservice.adapter.out.persistence.jpa.product;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -18,7 +15,11 @@ public class ProductDetailImageEntity {
 
 	private String imageUrl;
 
-	public ProductDetailImageEntity(String imageUrl) {
+	@Builder
+	public ProductDetailImageEntity(Long id, String imageUrl) {
+		this.id = id;
 		this.imageUrl = imageUrl;
 	}
+
+
 }

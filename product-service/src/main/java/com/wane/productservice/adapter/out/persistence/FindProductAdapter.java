@@ -12,12 +12,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FindProductAdapter implements FindProductPort {
 
+	private final ProductMapper productMapper;
 	private final ProductEntityRepository productEntityRepository;
 
 	@Override
 	public Product findProductById(Long productId) {
 		ProductEntity productEntity = productEntityRepository.findById(productId)
 				.orElseThrow(() -> new RuntimeException("Product not found"));
-		return ProductMapper.toDomainEntityForDetail(productEntity);
+		return productMapper.toDomainEntityForDetail(productEntity);
 	}
 }

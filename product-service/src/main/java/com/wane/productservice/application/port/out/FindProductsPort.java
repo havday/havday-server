@@ -7,4 +7,6 @@ import java.util.List;
 public interface FindProductsPort {
 
 	List<Product> findProductsOrderByIdAscWithCursor(Long productId, int size);
+
+    List<Product> findProductsByProductIdIn(List<Long> productIds);
 }

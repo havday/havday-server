@@ -41,22 +41,18 @@ class ProductEntityRepositoryTest {
 	}
 
 	private ProductEntity createProductJpaEntity(String name, int price) {
-		return new ProductEntity(
-				name,
-				price,
-				"COTTON 100%",
-				"""
+		return ProductEntity.builder()
+				.name(name)
+				.price(price)
+				.materialDescription("COTTON 100%")
+				.sizeDescription("""
 						SIZE - FREE
 
 						VISOR - 7
 
-						DEPTH - 15.5""",
-				100,
-				"",
-				null,
-				null
-		);
+						DEPTH - 15.5""")
+				.quantity(100)
+				.mainImageUrl("")
+				.build();
 	}
-
-
 }

@@ -9,6 +9,8 @@ group = 'com.wane'
 version = '0.0.1-SNAPSHOT'
 
 dependencies {
+    implementation project(path: ":common")
+
     //Spring
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
