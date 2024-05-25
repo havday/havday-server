@@ -17,6 +17,11 @@ public class DecreaseProductQuantityAdapter implements DecreaseProductQuantityPo
     @Override
     public void decreaseProductQuantity(List<ProductItem> productItems) {
 
+        List<ProductIdWithDecreaseQuantity> requestBody = productItems.stream().
+                map(productItem ->
+                        new ProductIdWithDecreaseQuantity(productItem.getProductId(), productItem.getQuantity())
+                ).toList();
+
         RestClient.create().put()
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
@@ -25,7 +30,7 @@ public class DecreaseProductQuantityAdapter implements DecreaseProductQuantityPo
                         .path("products/decrease-quantity")
                         .build()
                 )
-                .body(productItems)
+                .body(requestBody)
                 .retrieve()
                 .onStatus(httpStatusCode -> httpStatusCode.isError() || httpStatusCode.is4xxClientError(), (req, res) -> {
                     throw new CustomException(PRODUCT_QUANTITY_DECREASE_FAILED);

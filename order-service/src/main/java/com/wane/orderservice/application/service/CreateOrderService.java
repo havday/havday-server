@@ -63,12 +63,12 @@ public class CreateOrderService implements CreateOrderUseCase {
 
 	private void isProductQuantityEnoughOrElseThrow(List<ProductItem> productItems, List<ProductIdAndQuantity> productIdAndQuantityList) {
 		Map<Long, Integer> productIdToQuantityMap = productIdAndQuantityList.stream()
-				.collect(Collectors.toMap(ProductIdAndQuantity::productId, ProductIdAndQuantity::quantity));
+				.collect(Collectors.toMap(ProductIdAndQuantity::id, ProductIdAndQuantity::quantity));
 
 		for (ProductItem productItem : productItems) {
 			int quantity = productIdToQuantityMap.get(productItem.getId());
 			if (quantity < productItem.getQuantity()) {
-				throw new CustomException(PRODUCT_NOT_ENOUGH_QUANTITY);
+				throw new CustomException(PRODUCT_QUANTITY_NOT_ENOUGH);
 			}
 		}
 	}
