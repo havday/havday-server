@@ -23,7 +23,7 @@ public class FindProductIdAndPriceListAdapter implements FindProductIdAndPriceLi
 						.scheme("http")
 						.host("product-service")
 						.port("8080")
-						.path("products/id-price")
+						.path("/products/id-price")
 						.queryParam("productIds", productIds)
 						.build()
 				)

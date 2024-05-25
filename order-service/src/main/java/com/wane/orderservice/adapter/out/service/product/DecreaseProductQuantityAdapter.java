@@ -27,7 +27,7 @@ public class DecreaseProductQuantityAdapter implements DecreaseProductQuantityPo
                         .scheme("http")
                         .host("product-service")
                         .port("8080")
-                        .path("products/decrease-quantity")
+                        .path("/products/decrease-quantity")
                         .build()
                 )
                 .body(requestBody)
