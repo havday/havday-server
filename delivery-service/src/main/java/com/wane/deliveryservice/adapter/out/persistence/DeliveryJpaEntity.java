@@ -21,7 +21,7 @@ public class DeliveryJpaEntity {
     private Long memberId;
 
     @Column(nullable = false)
-    private Long orderId;
+    private String orderId;
 
     private String invoiceNumber;
 
@@ -33,7 +33,7 @@ public class DeliveryJpaEntity {
     private AddressJpaEntity address;
 
     @Builder
-    public DeliveryJpaEntity(Long id, Long memberId, Long orderId, String invoiceNumber, DeliveryStatus deliveryStatus, AddressJpaEntity address) {
+    public DeliveryJpaEntity(Long id, Long memberId, String orderId, String invoiceNumber, DeliveryStatus deliveryStatus, AddressJpaEntity address) {
         this.id = id;
         this.memberId = memberId;
         this.orderId = orderId;

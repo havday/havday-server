@@ -50,7 +50,7 @@ public class OrderMapper {
 		List<ProductItem> productItems = orderJpaEntity.getProductItems().stream()
 				.map(this::toDomainEntity)
 				.toList();
-		return Order.forMapper(
+		return Order.of(
 				orderJpaEntity.getId(),
 				orderJpaEntity.getMemberId(),
 				orderJpaEntity.getAddressId(),

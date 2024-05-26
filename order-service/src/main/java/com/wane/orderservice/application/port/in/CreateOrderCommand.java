@@ -46,6 +46,10 @@ public class CreateOrderCommand extends SelfValidating<CreateOrderCommand> {
 
 	public static CreateOrderCommand of(CreateOrderRequest request) {
 
+		if (request.productItems() == null) {
+			throw new IllegalArgumentException("상품들이 하나 이상 있어야 합니다.");
+		}
+
 		List<ProductItemCommand> productItemCommands = request.productItems()
 				.stream()
 				.map(ProductItemCommand::new)

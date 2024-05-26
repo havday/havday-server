@@ -29,7 +29,7 @@ public class CreateOrderService implements CreateOrderUseCase {
 	private final DecreaseProductQuantityPort decreaseProductQuantityPort;
 
 	@Override
-	public void createOrder(CreateOrderCommand command) {
+	public Order createOrder(CreateOrderCommand command) {
 
 		isDeliveryFeeCorrectWithTotalPrice(command);
 
@@ -58,7 +58,7 @@ public class CreateOrderService implements CreateOrderUseCase {
 
 		createDeliveryPort.createDelivery(new CreateDeliveryCommand(savedOrder.getMemberId(), savedOrder.getAddressId(), savedOrder.getId()));
 
-
+		return savedOrder;
 	}
 
 	private void isProductQuantityEnoughOrElseThrow(List<ProductItem> productItems, List<ProductIdAndQuantity> productIdAndQuantityList) {

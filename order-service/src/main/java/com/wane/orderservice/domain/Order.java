@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 public class Order {
 
-	private Long id;
+	private String id;
 	private Long memberId;
 	private Long addressId;
 	//TODO : total price 라는 말이 애매한가? 이걸 보고 배송비 포함인지, 포인트 빠지고 다 계산한 금액인가?
@@ -21,7 +21,7 @@ public class Order {
 	private Payment payment;
 	private List<ProductItem> productItems;
 
-	private Order(Long id, Long memberId, Long addressId, int totalPrice, boolean isDeliveryFeeExists, int usedPoint, OrderStatus orderStatus, LocalDateTime createdAt, Payment payment, List<ProductItem> productItems) {
+	private Order(String id, Long memberId, Long addressId, int totalPrice, boolean isDeliveryFeeExists, int usedPoint, OrderStatus orderStatus, LocalDateTime createdAt, Payment payment, List<ProductItem> productItems) {
 		this.id = id;
 		this.memberId = memberId;
 		this.addressId = addressId;
@@ -61,7 +61,7 @@ public class Order {
 		}
 	}
 
-	public static Order forMapper(Long id, Long memberId, Long addressId, int totalPrice, boolean isDeliveryFeeExists, int usedPoint, OrderStatus orderStatus, LocalDateTime orderDateTime, Payment payment, List<ProductItem> productItems) {
+	public static Order of(String id, Long memberId, Long addressId, int totalPrice, boolean isDeliveryFeeExists, int usedPoint, OrderStatus orderStatus, LocalDateTime orderDateTime, Payment payment, List<ProductItem> productItems) {
 		return new Order(id, memberId, addressId, totalPrice, isDeliveryFeeExists, usedPoint, orderStatus, orderDateTime, payment, productItems);
 	}
 }

@@ -11,9 +11,9 @@ public class CreateDeliveryCommand extends SelfValidating<CreateDeliveryCommand>
     @NotNull(message = "Address Id 는 필수 값 입니다.")
     private final Long addressId;
     @NotNull(message = "Order Id 는 필수 값 입니다.")
-    private final Long orderId;
+    private final String orderId;
 
-    public CreateDeliveryCommand(Long memberId, Long addressId, Long orderId) {
+    public CreateDeliveryCommand(Long memberId, Long addressId, String orderId) {
         this.memberId = memberId;
         this.addressId = addressId;
         this.orderId = orderId;
