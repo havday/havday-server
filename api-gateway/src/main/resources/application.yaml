@@ -1,6 +1,13 @@
 spring.application.name: api-gateway
 
+
+jwt:
+  secret-key: asldkasjldkajsldkjalskdjalskdjasd
+
+
 spring:
+  main:
+    web-application-type: reactive
   profiles:
     default: local
 
