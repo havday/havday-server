@@ -74,7 +74,7 @@ docker {
 
 
     //이미지 이름
-    name project.rootProject.dockerRepository+"/"+project.rootProject.dockerRepository+"/"+rootProject.name+"-"+project.name + ":" + version
+    name project.rootProject.dockerRepository+"/"+rootProject.name+"-"+project.name + ":" + version
 
     //어떤 Dockerfile을 사용할지
     dockerfile file("../Dockerfile")
