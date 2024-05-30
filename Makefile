@@ -1,10 +1,13 @@
 .PHONY: run
 
+REGISTRY ?= registry
+IMAGETAG ?= latest
+
 run:
 	@echo	"Running Dockerfile"
-	@docker build -t api-gateway:1.0.0 ./api-gateway
-	@docker build -t delivery-service:1.0.0 ./delivery-service
-	@docker build -t member-service:1.0.0 ./member-service
-	@docker build -t order-service:1.0.0 ./order-service
-	@docker build -t product-service:1.0.0 ./product-service
-	@docker build -t review-service:1.0.0 ./review-service
+	@docker build -t ${REGISTRY}/api-gateway:${IMAGETAG} ./api-gateway
+	@docker build -t ${REGISTRY}/delivery-service:${IMAGETAG} ./delivery-service
+	@docker build -t ${REGISTRY}/member-service:${IMAGETAG} ./member-service
+	@docker build -t ${REGISTRY}/order-service:${IMAGETAG} ./order-service
+	@docker build -t ${REGISTRY}/product-service:${IMAGETAG} ./product-service
+	@docker build -t ${REGISTRY}/review-service:${IMAGETAG} ./review-service
