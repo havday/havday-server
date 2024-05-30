@@ -1,20 +1,30 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id 'org.springframework.boot' version '3.2.5'
-    id 'io.spring.dependency-management' version '1.1.4'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
     id 'org.jetbrains.kotlin.jvm' version '1.9.23'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.9.23'
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.9.23'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'com.palantir.docker' version "0.36.0"
 }
 
 group = 'com.wane'
 version = '0.0.1-SNAPSHOT'
 
+configurations {
+    asciidoctorExt
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 dependencies {
     //spring
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //Spring-Rest-Docs
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
     //kotlin
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
@@ -34,4 +44,44 @@ tasks.withType(KotlinCompile).configureEach {
         jvmTarget = '21'
     }
 
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
+}
+
+test {
+    outputs.dir snippetsDir
+    useJUnitPlatform()
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    configurations 'asciidoctorExt'
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}/html5") {
+        into 'static/docs'
+    }
+
+}
+
+docker {
+    println(tasks.bootJar.outputs.files)
+
+
+    //이미지 이름
+    name project.rootProject.dockerRepository+"/"+project.rootProject.dockerRepository+"/"+rootProject.name+"-"+project.name + ":" + version
+
+    //어떤 Dockerfile을 사용할지
+    dockerfile file("../Dockerfile")
+
+    //어떤 파일들을 Dockerfile에 복사할 것인가
+    files tasks.bootJar.outputs.files
+
+    //Dockerfile에 전달할 인자
+    buildArgs(['JAR_FILE' : tasks.bootJar.outputs.files.singleFile.name])
 }
