@@ -34,7 +34,7 @@ public class CreateDeliveryProducer implements CreateDeliveryPort {
                 .createProducer()) {
             producer.send(record, (metadata, exception) -> {
                 if (exception == null) {
-                    System.out.println("Message sent successfully. Offset: " + metadata.offset());
+                    log.info("Message sent successfully. offset: {} value : {} ", metadata.offset(), record.value());
                 } else {
                     log.error("failed to SendMessage to Kafka :delivery + orderId = {} ", command.orderId(), exception);
                 }
