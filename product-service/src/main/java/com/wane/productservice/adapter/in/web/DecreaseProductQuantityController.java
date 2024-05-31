@@ -17,7 +17,7 @@ public class DecreaseProductQuantityController {
 
     private final DecreaseEachProductQuantityUseCase decreaseProductQuantityUseCase;
 
-    @PutMapping("/products/decrease-quantity")
+    @PutMapping("/api/v1/products/decrease-quantity")
     public ResponseEntity<Void> decreaseProductQuantity(
             @RequestBody List<ProductIdAndDecreaseQuantity> requestList
     ) {

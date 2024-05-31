@@ -3,9 +3,11 @@ package com.wane.productservice.domain;
 import com.wane.exception.CustomException;
 import com.wane.exception.ErrorCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
+@ToString
 @Getter
 public class Product {
 

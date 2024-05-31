@@ -16,6 +16,22 @@ import java.util.stream.Collectors;
 @Component
 public class ProductMapper {
 
+    public Product toDomainEntity(ProductEntity productEntity) {
+        return Product.of(
+                productEntity.getId(),
+                productEntity.getName(),
+                productEntity.getPrice(),
+                productEntity.getMaterialDescription(),
+                productEntity.getSizeDescription(),
+                productEntity.getQuantity(),
+                productEntity.getMainImageUrl(),
+//                TODO: need to fix
+//                productEntity.getCategories().stream().map(this::toDomainEntity).collect(Collectors.toList()),
+                null,
+                productEntity.getProductDetailImages().stream().map(this::toDomainEntity).collect(Collectors.toList())
+        );
+    }
+
     public Product toDomainEntityForMain(ProductEntity productEntity) {
         return Product.forMain(
                 productEntity.getId(),

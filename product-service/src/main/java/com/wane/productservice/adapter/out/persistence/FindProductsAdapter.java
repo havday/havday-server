@@ -23,7 +23,7 @@ public class FindProductsAdapter implements FindProductsPort {
         List<ProductEntity> productEntityList = productRepository.findProductsOrderByIdAscWithCursor(productId, size);
 
         return productEntityList.stream()
-                .map(productMapper::toDomainEntityForMain)
+                .map(productMapper::toDomainEntity)
                 .toList();
 
     }
@@ -33,7 +33,7 @@ public class FindProductsAdapter implements FindProductsPort {
         List<ProductEntity> productEntityList = productRepository.findAllByIdIn(productIds);
 
         return productEntityList.stream()
-                .map(productMapper::toDomainEntityForMain)
+                .map(productMapper::toDomainEntity)
                 .toList();
     }
 

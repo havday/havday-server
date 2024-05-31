@@ -36,10 +36,10 @@ public class ProductEntity {
 
     private String mainImageUrl;
 
-    @OneToMany(mappedBy = "product", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<ProductCategoryEntity> categories = new LinkedHashSet<>();
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<ProductDetailImageEntity> productDetailImages = new ArrayList<>();
 
