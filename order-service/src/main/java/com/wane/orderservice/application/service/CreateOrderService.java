@@ -8,6 +8,7 @@ import com.wane.orderservice.domain.Delivery;
 import com.wane.orderservice.domain.Order;
 import com.wane.orderservice.domain.ProductItem;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 import static com.wane.exception.ErrorCode.*;
 
+@Slf4j
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -66,7 +68,7 @@ public class CreateOrderService implements CreateOrderUseCase {
 				.collect(Collectors.toMap(ProductIdAndQuantity::id, ProductIdAndQuantity::quantity));
 
 		for (ProductItem productItem : productItems) {
-			int quantity = productIdToQuantityMap.get(productItem.getId());
+			int quantity = productIdToQuantityMap.get(productItem.getProductId());
 			if (quantity < productItem.getQuantity()) {
 				throw new CustomException(PRODUCT_QUANTITY_NOT_ENOUGH);
 			}
@@ -88,7 +90,7 @@ public class CreateOrderService implements CreateOrderUseCase {
 				.collect(Collectors.toMap(ProductIdAndPrice::id, ProductIdAndPrice::price));
 
 		for (ProductItem productItem : productItems) {
-			int price = productIdToPriceMap.get(productItem.getId());
+			int price = productIdToPriceMap.get(productItem.getProductId());
 			calculateTotalPriceByProducts += price * productItem.getQuantity();
 		}
 
