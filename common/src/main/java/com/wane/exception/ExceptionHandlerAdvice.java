@@ -10,24 +10,22 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
 
-
-
 	@ExceptionHandler({IllegalArgumentException.class, ConstraintViolationException.class})
-	public ResponseEntity<String> handleValidationException(IllegalArgumentException e) {
-		log.warn("사용자 입력정보 오류 발생 : {}", e.getMessage());
+	public ResponseEntity<String> handleValidationException(Exception e) {
+		log.error("사용자 입력정보 오류 발생 :", e);
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 
 	@ExceptionHandler(CustomException.class)
 	public ResponseEntity<String> handleCustomException(CustomException e) {
-		log.error(e.getMessage());
+		log.error("CustomException 발생 : {}  ", e.getErrorCode().getCode(), e);
 		return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(e.getErrorCode().getMessage());
 	}
 
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleException(Exception e) {
-		log.error(e.getMessage());
+		log.error("서버 에러 발생 ", e);
 		return ResponseEntity.internalServerError().body("서버에 에러가 발생하였습니다. 관리자에게 문의주세요.");
 	}
 
