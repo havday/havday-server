@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
+	AUTHORIZATION_FAIL(HttpStatus.UNAUTHORIZED, "1", "인증되지 않은 사용자 입니다."),
+	JWT_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "2", "JWT 토큰이 만료되었습니다."),
+	AUTH_MEMBER_NOT_FOUND(HttpStatus.UNAUTHORIZED, "3", "멤버가 일치하지 않습니다."),
 	MEMBER_ALREADY_REGISTERED(HttpStatus.BAD_REQUEST, "11", "이미 가입된 회원 입니다."),
 	MEMBER_NOT_MATCH(HttpStatus.BAD_REQUEST, "10", "멤버가 존재하지 않습니다."),
 	PRODUCT_PRICE_NOT_MATCH(HttpStatus.BAD_REQUEST, "12", "상품과 주문금액이 일치하지 않습니다."),
