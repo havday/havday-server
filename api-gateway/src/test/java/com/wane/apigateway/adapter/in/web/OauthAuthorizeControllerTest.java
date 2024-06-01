@@ -54,7 +54,7 @@ class OauthAuthorizeControllerTest {
 		//when & then
 		webTestClient.get()
 				.uri(uriBuilder -> uriBuilder
-						.path("/api/oauth/{oauthName}/authorize")
+						.path("/api/v1/oauth/{oauthName}/authorize")
 						.queryParam("redirectUri", "")
 						.queryParam("code", "code")
 						.queryParam("state", "state")
@@ -96,7 +96,7 @@ class OauthAuthorizeControllerTest {
 		//when & then
 		webTestClient.get()
 				.uri(uriBuilder -> uriBuilder
-						.path("/api/oauth/{oauthName}/authorize")
+						.path("/api/v1/oauth/{oauthName}/authorize")
 						.queryParam("redirectUri", "")
 						.queryParam("code", "code")
 						.queryParam("state", "state")
@@ -130,7 +130,7 @@ class OauthAuthorizeControllerTest {
 		//when & then
 		webTestClient.get()
 				.uri(uriBuilder -> uriBuilder
-						.path("/api/oauth/{oauthName}/authorize")
+						.path("/api/v1/oauth/{oauthName}/authorize")
 						.queryParam("redirectUri", "https://localhost:3000/naver/fallback")
 						.queryParam("code", "code")
 						.queryParam("state", "")
@@ -168,7 +168,7 @@ class OauthAuthorizeControllerTest {
 		//when & then
 		webTestClient.get()
 				.uri(uriBuilder -> uriBuilder
-						.path("/api/oauth/{oauthName}/authorize")
+						.path("/api/v1/oauth/{oauthName}/authorize")
 						.queryParam("redirectUri", "https://localhost:3000/naver/fallback")
 						.queryParam("code", "code")
 						.queryParam("state", "")

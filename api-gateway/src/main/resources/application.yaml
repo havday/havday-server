@@ -4,12 +4,49 @@ spring.application.name: api-gateway
 jwt:
   secret-key: asldkasjldkajsldkjalskdjalskdjasd
 
+external:
+  member-service:
+    url: http://localhost:8081
 
 spring:
   main:
     web-application-type: reactive
   profiles:
     default: local
+  cloud:
+    gateway:
+      routes:
+        - id: api-gateway
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/jwt/test
+            - Path=/api/v1/jwt/reissue
+            - Path=/api/v1/oauth/**
+            - Path=/api/v1/no-auth/**
+          filters:
+            - name: LogPathFilter
+        - id: delivery-service
+          uri: http://delivery-service
+          predicates:
+              - Path=/api/v1/deliveries/**
+        - id: member-service
+          uri: http://member-service
+          predicates:
+              - Path=/api/v1/members/**
+        - id: order-service
+          uri: http://order-service
+          predicates:
+              - Path=/api/v1/orders/**
+        - id: product-service
+          uri: http://product-service
+          predicates:
+              - Path=/api/v1/products/**
+        - id: review-service
+          uri: http://review-service
+          predicates:
+              - Path=/api/v1/reviews/**
+      default-filters:
+        - name: AuthenticationFilter
 
 ---
 spring:

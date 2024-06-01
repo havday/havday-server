@@ -22,7 +22,7 @@ public class OauthAuthorizeController {
 
 	private final OauthAuthorizeTypeFinder oauthAuthorizeTypeFinder;
 
-	@GetMapping("/api/oauth/{oauthName}/authorize")
+	@GetMapping("/api/v1/oauth/{oauthName}/authorize")
 	public ResponseEntity<OauthDataResponse> authorize(
 			@PathVariable String oauthName,
 			@RequestParam(defaultValue = "") String redirectUri,
