@@ -16,7 +16,7 @@ public class SaveAddressController {
 
 	private final SaveAddressUseCase saveAddressUseCase;
 
-	@PostMapping("/api/v1/addresses")
+	@PostMapping("/api/v1/members/addresses")
 	public ResponseEntity<Void> saveAddress(@RequestBody SaveAddressRequest request) {
 
 		//TODO : memberId 를 api gateway에서 받을거고 임시로 requestBody에 받게 수정

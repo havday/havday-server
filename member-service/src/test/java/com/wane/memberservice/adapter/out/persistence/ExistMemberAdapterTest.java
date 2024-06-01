@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 class ExistMemberAdapterTest extends IntegrationTestSupport {
 
 	@Autowired
-	private ExistUserPersistenceAdapter existMemberAdapter;
+	private ExistMemberPersistenceAdapter existMemberAdapter;
 
 	@Autowired
 	private MemberJpaEntityRepository memberRepository;
@@ -29,7 +29,7 @@ class ExistMemberAdapterTest extends IntegrationTestSupport {
 		saveMemberEntityWithEmail(email);
 
 		//when
-		boolean isMemberExists = existMemberAdapter.existUserByEmail(email);
+		boolean isMemberExists = existMemberAdapter.existMemberByEmail(email);
 
 		//then
 		Assertions.assertThat(isMemberExists).isTrue();
@@ -45,7 +45,7 @@ class ExistMemberAdapterTest extends IntegrationTestSupport {
 		saveMemberEntityWithEmail(email);
 
 		//when
-		boolean isMemberExists = existMemberAdapter.existUserByEmail(notExistsEmail);
+		boolean isMemberExists = existMemberAdapter.existMemberByEmail(notExistsEmail);
 
 		//then
 		Assertions.assertThat(isMemberExists).isFalse();

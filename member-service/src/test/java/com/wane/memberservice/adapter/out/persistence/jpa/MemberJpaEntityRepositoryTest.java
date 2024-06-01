@@ -27,7 +27,7 @@ class MemberJpaEntityRepositoryTest {
 		repository.save(memberEntity);
 
 		//when
-		Optional<MemberJpaEntity> optionalMemberEntity = repository.findByEmailAndMemberRole(findEmail, MemberRole.USER);
+		Optional<MemberJpaEntity> optionalMemberEntity = repository.findByEmail(findEmail);
 
 		//then
 		assertThat(optionalMemberEntity).isPresent();

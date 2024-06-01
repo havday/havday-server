@@ -17,7 +17,7 @@ public class RegisterUserController {
 
 	private final RegisterUserUseCase registerUserUseCase;
 
-	@PostMapping("/api/v1/users")
+	@PostMapping("/api/v1/members/users")
 	public ResponseEntity<Void> registerUser(
 			@RequestBody RegisterUserRequest request
 	) {

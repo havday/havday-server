@@ -2,14 +2,14 @@ package com.wane.memberservice.adapter.out.persistence;
 
 import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntity;
 import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntityRepository;
-import com.wane.memberservice.application.port.out.RegisterUserPort;
+import com.wane.memberservice.application.port.out.RegisterMemberPort;
 import com.wane.memberservice.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class RegisterUserPersistenceAdapter implements RegisterUserPort {
+public class RegisterMemberPersistenceAdapter implements RegisterMemberPort {
 
 	private final MemberJpaEntityRepository repository;
 	private final MemberMapper memberMapper;

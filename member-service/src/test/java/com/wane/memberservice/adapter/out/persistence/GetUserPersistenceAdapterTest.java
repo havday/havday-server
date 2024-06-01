@@ -6,8 +6,6 @@ import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntityReposit
 import com.wane.memberservice.domain.AuthServiceType;
 import com.wane.memberservice.domain.Member;
 import com.wane.memberservice.domain.MemberRole;
-import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ import static org.assertj.core.api.Assertions.*;
 class GetUserPersistenceAdapterTest extends IntegrationTestSupport {
 
 	@Autowired
-	private GetUserPersistenceAdapter getUserPersistenceAdapter;
+	private GetMemberPersistenceAdapter getUserPersistenceAdapter;
 
 	@Autowired
 	private MemberJpaEntityRepository memberRepository;

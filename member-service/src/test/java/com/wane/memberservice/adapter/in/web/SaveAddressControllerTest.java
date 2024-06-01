@@ -41,7 +41,7 @@ class SaveAddressControllerTest {
 		SaveAddressRequest request = new SaveAddressRequest(1L, "재완집", "수취자", "12345", "도로명 주소", "상세 주소", "01012341234", true);
 
 		//when & then
-		mockMvc.perform(post("/api/v1/addresses")
+		mockMvc.perform(post("/api/v1/members/addresses")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(request)))
 				.andDo(print())

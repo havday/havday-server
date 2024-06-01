@@ -2,17 +2,16 @@ package com.wane.orderservice.adapter.out.persistence.jpa;
 
 import com.wane.orderservice.domain.OrderStatus;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 @Table(name = "orders")
@@ -43,11 +42,8 @@ public class OrderJpaEntity {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @Version
-    private long version;
-
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "orders_id")
+    @JoinColumn(name = "payment_id")
     private PaymentJpaEntity payment;
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)

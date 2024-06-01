@@ -40,7 +40,7 @@ class RegisterUserControllerTest {
 		RegisterUserRequest request = new RegisterUserRequest("박재완", "wan2daaa@gmail.com", "", "01012341234", AuthServiceType.KAKAO, "authId");
 
 		//when //then
-		mockMvc.perform(post("/api/v1/users")
+		mockMvc.perform(post("/api/v1/members/users")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(request)))
 				.andDo(print())

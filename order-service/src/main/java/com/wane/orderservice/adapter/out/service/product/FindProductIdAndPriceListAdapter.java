@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wane.orderservice.application.port.out.FindProductIdAndPriceListPort;
 import com.wane.orderservice.application.port.out.ProductIdAndPrice;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -13,28 +14,31 @@ import java.util.List;
 @Component
 public class FindProductIdAndPriceListAdapter implements FindProductIdAndPriceListPort {
 
-	@Override
-	public List<ProductIdAndPrice> findProductIdAndPriceListByProductIds(List<Long> productIds) {
+    @Value("${external.product-service.url}")
+    private String productServiceUrl;
 
-		ObjectMapper objectMapper = new ObjectMapper();
+    @Override
+    public List<ProductIdAndPrice> findProductIdAndPriceListByProductIds(List<Long> productIds) {
 
-		String stringResponse = RestClient.create().get()
-				.uri(uriBuilder -> uriBuilder
-						.scheme("http")
-						.host("product-service")
-						.port("8080")
-						.path("/products/id-price")
-						.queryParam("productIds", productIds)
-						.build()
-				)
-				.retrieve()
-				.body(String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
 
-		try {
-			if (stringResponse.isEmpty()) return List.of();
-			return objectMapper.readValue(stringResponse, new TypeReference<List<ProductIdAndPrice>>() {});
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
-		}
-	}
+        String stringResponse = RestClient.create().get()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(productServiceUrl)
+                        .path("/api/v1/products/id-price")
+                        .queryParam("productIds", productIds)
+                        .build()
+                )
+                .retrieve()
+                .body(String.class);
+
+        try {
+            if (stringResponse.isEmpty()) return List.of();
+            return objectMapper.readValue(stringResponse, new TypeReference<List<ProductIdAndPrice>>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

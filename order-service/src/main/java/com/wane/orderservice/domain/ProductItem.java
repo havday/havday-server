@@ -1,7 +1,9 @@
 package com.wane.orderservice.domain;
 
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 @Getter
 public class ProductItem {
 

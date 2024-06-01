@@ -4,8 +4,8 @@ import com.wane.exception.CustomException;
 import com.wane.exception.ErrorCode;
 import com.wane.memberservice.application.port.in.RegisterUserCommand;
 import com.wane.memberservice.application.port.in.RegisterUserUseCase;
-import com.wane.memberservice.application.port.out.ExistUserPort;
-import com.wane.memberservice.application.port.out.RegisterUserPort;
+import com.wane.memberservice.application.port.out.ExistMemberPort;
+import com.wane.memberservice.application.port.out.RegisterMemberPort;
 import com.wane.memberservice.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class RegisterUserService implements RegisterUserUseCase {
+public class RegisterMemberService implements RegisterUserUseCase {
 
-	private final RegisterUserPort registerUserPort;
-	private final ExistUserPort existUserPort;
+	private final RegisterMemberPort registerMemberPort;
+	private final ExistMemberPort existMemberPort;
 
 	@Transactional
 	@Override
 	public void registerUser(RegisterUserCommand command) {
 
-		boolean isUserExists = existUserPort.existUserByEmail(command.getEmail());
+		boolean isUserExists = existMemberPort.existMemberByEmail(command.getEmail());
 
 		if (isUserExists) {
 			throw new CustomException(ErrorCode.MEMBER_ALREADY_REGISTERED);
@@ -36,6 +36,6 @@ public class RegisterUserService implements RegisterUserUseCase {
 				command.getAuthServiceType(),
 				command.getAuthId()
 		);
-		registerUserPort.registerUser(member);
+		registerMemberPort.registerUser(member);
 	}
 }

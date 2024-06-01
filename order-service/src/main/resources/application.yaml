@@ -1,8 +1,17 @@
 spring.application.name: order-service
 
+kafka:
+  bootstrap-servers: localhost:9092
+
+external:
+  product-service:
+    url: http://localhost:8080
+
+
 spring:
   profiles:
     default: local
+
 
 
   datasource:
@@ -15,6 +24,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
 
 ---
 
