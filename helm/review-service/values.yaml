@@ -5,14 +5,13 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: wan2da/havday-server-review-service
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "0.0.2-SNAPSHOT"
 
 imagePullSecrets: []
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "review-service"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -73,12 +72,12 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /actuator/health
+    port: 8080
 readinessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /actuator/health
+    port: 8080
 
 autoscaling:
   enabled: false
