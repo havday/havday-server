@@ -3,9 +3,6 @@ plugins {
     id 'com.palantir.docker' version "0.36.0"
 }
 
-group = 'com.wane'
-version = '0.0.1-SNAPSHOT'
-
 configurations {
     asciidoctorExt
     compileOnly {

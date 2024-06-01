@@ -9,6 +9,10 @@ ext {
 }
 
 subprojects {
+
+    group = 'me.wane'
+    version = '0.0.2-SNAPSHOT'
+
     compileJava {
         sourceCompatibility = '21'
         targetCompatibility = '21'
