@@ -1,4 +1,4 @@
-package com.wane.productservice.adapter.in.web;
+package com.wane.productservice.adapter.in.web.external;
 
 import com.wane.productservice.adapter.in.web.dto.response.DetailProductResponse;
 import com.wane.productservice.application.port.in.FindProductUseCase;
@@ -16,7 +16,7 @@ public class FindProductController {
 
 	private final FindProductUseCase findProductUseCase;
 
-	@GetMapping("/api/v1/products/{productId}")
+	@GetMapping("/api/v1/no-auth/products/{productId}")
 	public ResponseEntity<DetailProductResponse> findProduct(@PathVariable Long productId) {
 		Product product = findProductUseCase.findProduct(productId);
 		return ResponseEntity.ok(

@@ -1,10 +1,9 @@
-package com.wane.memberservice.adapter.in.web;
+package com.wane.memberservice.adapter.in.web.external;
 
 import com.wane.memberservice.adapter.in.web.dto.request.RegisterUserRequest;
 import com.wane.memberservice.application.port.in.RegisterUserCommand;
 import com.wane.memberservice.application.port.in.RegisterUserUseCase;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,7 @@ public class RegisterUserController {
 
 	private final RegisterUserUseCase registerUserUseCase;
 
-	@PostMapping("/api/v1/members/users")
+	@PostMapping("/api/v1/no-auth/members/users")
 	public ResponseEntity<Void> registerUser(
 			@RequestBody RegisterUserRequest request
 	) {

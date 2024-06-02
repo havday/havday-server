@@ -1,13 +1,10 @@
-package com.wane.productservice.adapter.in.web;
+package com.wane.productservice.adapter.in.web.internal;
 
 import com.wane.exception.CustomException;
 import com.wane.exception.ErrorCode;
-import com.wane.productservice.adapter.in.web.dto.response.FindMainProduct;
-import com.wane.productservice.adapter.in.web.dto.response.FindMainProductsResponse;
 import com.wane.productservice.adapter.in.web.dto.response.ProductIdAndPriceResponse;
 import com.wane.productservice.adapter.in.web.dto.response.ProductIdAndQuantityResponse;
 import com.wane.productservice.application.port.in.FindProductsUseCase;
-import com.wane.productservice.common.CursorResponse;
 import com.wane.productservice.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,24 +16,11 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class FindProductsController {
+public class InternalFindProductsController {
 
     private final FindProductsUseCase findProductsUseCase;
 
-    @GetMapping("/api/v1/products")
-    public ResponseEntity<FindMainProductsResponse> findProductsWithNoOffset(@RequestParam(defaultValue = "1") Long productId, @RequestParam(defaultValue = "9") int size) {
-
-        CursorResponse<Product> cursorResponse = findProductsUseCase.findProductsWithCursor(productId, size);
-
-        return ResponseEntity.ok(
-                new FindMainProductsResponse(
-                        cursorResponse.hasNext(),
-                        cursorResponse.data().stream().map(FindMainProduct::fromDomainEntity).toList()
-                )
-        );
-    }
-
-    @GetMapping("/api/v1/products/id-price")
+    @GetMapping("/internal/v1/products/id-price")
     public ResponseEntity<List<ProductIdAndPriceResponse>> findProductIdAndPriceListByProductIds(@RequestParam("productIds") List<Long> productIds) {
 
         if (productIds.isEmpty()) {
@@ -49,7 +33,7 @@ public class FindProductsController {
         return ResponseEntity.ok(responseList);
     }
 
-    @GetMapping("/api/v1/products/id-quantity")
+    @GetMapping("/internal/v1/products/id-quantity")
     public ResponseEntity<List<ProductIdAndQuantityResponse>> findProductIdAndQuantityListByProductIds(@RequestParam("productIds") List<Long> productIds) {
 
         if (productIds.isEmpty()) {

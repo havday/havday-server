@@ -32,7 +32,7 @@ public class DecreaseProductQuantityAdapter implements DecreaseProductQuantityPo
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
                         .host(productServiceUrl)
-                        .path("/api/v1/products/decrease-quantity")
+                        .path("/internal/v1/products/decrease-quantity")
                         .build()
                 )
                 .body(requestBody)

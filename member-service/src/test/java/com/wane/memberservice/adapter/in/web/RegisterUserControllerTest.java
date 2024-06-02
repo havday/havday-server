@@ -2,6 +2,7 @@ package com.wane.memberservice.adapter.in.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wane.memberservice.adapter.in.web.dto.request.RegisterUserRequest;
+import com.wane.memberservice.adapter.in.web.external.RegisterUserController;
 import com.wane.memberservice.application.port.in.RegisterUserUseCase;
 import com.wane.memberservice.domain.AuthServiceType;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ class RegisterUserControllerTest {
 		RegisterUserRequest request = new RegisterUserRequest("박재완", "wan2daaa@gmail.com", "", "01012341234", AuthServiceType.KAKAO, "authId");
 
 		//when //then
-		mockMvc.perform(post("/api/v1/members/users")
+		mockMvc.perform(post("/api/v1/no-auth/members/users")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(request)))
 				.andDo(print())

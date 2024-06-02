@@ -1,6 +1,7 @@
 package com.wane.productservice.adapter.in.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wane.productservice.adapter.in.web.external.FindProductController;
 import com.wane.productservice.application.port.in.FindProductUseCase;
 import com.wane.productservice.domain.Product;
 import com.wane.productservice.domain.ProductDetailImage;
@@ -58,7 +59,7 @@ class FindProductControllerTest {
 				));
 
 		//when //then
-		mockMvc.perform(get("/api/v1/products/{productId}", productId))
+		mockMvc.perform(get("/api/v1/no-auth/products/{productId}", productId))
 				.andExpect(status().isOk())
 				.andDo(print())
 				.andDo(document("find-product/success",

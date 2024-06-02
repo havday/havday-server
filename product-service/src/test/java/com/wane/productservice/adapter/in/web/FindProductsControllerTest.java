@@ -1,6 +1,7 @@
 package com.wane.productservice.adapter.in.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wane.productservice.adapter.in.web.external.FindProductsController;
 import com.wane.productservice.application.port.in.FindProductsUseCase;
 import com.wane.productservice.common.CursorResponse;
 import com.wane.productservice.domain.Product;
@@ -55,7 +56,7 @@ class FindProductsControllerTest {
 				.willReturn(new CursorResponse<>(true, List.of(product1, product2)));
 
 		//when & then
-		mockMvc.perform(get("/api/v1/products")
+		mockMvc.perform(get("/api/v1/no-auth/products")
 						.param("productId", String.valueOf(1))
 						.param("size", String.valueOf(2)))
 				.andExpect(status().isOk())
@@ -91,7 +92,7 @@ class FindProductsControllerTest {
 				.willReturn(new CursorResponse<>(true, List.of(product1, product2)));
 
 		//when & then
-		mockMvc.perform(get("/api/v1/products"))
+		mockMvc.perform(get("/api/v1/no-auth/products"))
 				.andExpect(status().isOk())
 				.andDo(print())
 				.andDo(document("find-products-without-query-parameters/success",

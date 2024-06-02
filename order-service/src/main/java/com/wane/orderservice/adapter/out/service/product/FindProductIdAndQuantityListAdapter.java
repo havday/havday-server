@@ -30,7 +30,7 @@ public class FindProductIdAndQuantityListAdapter implements FindProductIdAndQuan
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
                         .host(productServiceUrl)
-                        .path("/api/v1/products/id-quantity")
+                        .path("/internal/v1/products/id-quantity")
                         .queryParam("productIds", productIds)
                         .build()
                 )

@@ -33,7 +33,7 @@ class CountReviewByProductControllerTest(
 
         //when
         //then
-        mockMvc.get("/api/v1/reviews/product/{productId}/count", productId){
+        mockMvc.get("/api/v1/no-auth/reviews/product/{productId}/count", productId){
             requestAttr(RestDocumentationGenerator.ATTRIBUTE_NAME_URL_TEMPLATE, "/api/v1/reviews/product/{productId}/count")
         }
             .andDo { print() }

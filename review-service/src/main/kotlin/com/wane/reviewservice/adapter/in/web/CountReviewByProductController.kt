@@ -12,7 +12,7 @@ class CountReviewByProductController(
     private val countReviewUseCase: CountReviewUseCase
 ) {
 
-    @GetMapping("/api/v1/reviews/product/{productId}/count")
+    @GetMapping("/api/v1/no-auth/reviews/product/{productId}/count")
     fun countReviewByProductId(
         @PathVariable productId: Long
     ): ResponseEntity<CountReviewResponse> {

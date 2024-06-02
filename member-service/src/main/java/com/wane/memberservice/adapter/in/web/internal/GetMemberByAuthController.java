@@ -1,4 +1,4 @@
-package com.wane.memberservice.adapter.in.web;
+package com.wane.memberservice.adapter.in.web.internal;
 
 import com.wane.memberservice.application.port.in.GetMemberByAuthUseCase;
 import com.wane.memberservice.domain.AuthServiceType;
@@ -14,7 +14,7 @@ public class GetMemberByAuthController {
 
 	private final GetMemberByAuthUseCase getMemberByAuthUseCase;
 
-	@GetMapping("/api/v1/members/oauth/{oauthType}/oauth-id/{oauthId}")
+	@GetMapping("/internal/v1/members/oauth/{oauthType}/oauth-id/{oauthId}")
 	public ResponseEntity<Long> getMemberByAuth(
 		@PathVariable AuthServiceType oauthType,
 		@PathVariable String oauthId

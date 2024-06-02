@@ -26,7 +26,7 @@ public class FindProductIdAndPriceListAdapter implements FindProductIdAndPriceLi
                 .uri(uriBuilder -> uriBuilder
                         .scheme("http")
                         .host(productServiceUrl)
-                        .path("/api/v1/products/id-price")
+                        .path("/internal/v1/products/id-price")
                         .queryParam("productIds", productIds)
                         .build()
                 )

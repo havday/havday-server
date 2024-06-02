@@ -1,4 +1,4 @@
-package com.wane.memberservice.adapter.in.web;
+package com.wane.memberservice.adapter.in.web.internal;
 
 import com.wane.memberservice.application.port.in.ExistsMemberByIdUseCase;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ public class ExistsMemberByIdController {
 
     private final ExistsMemberByIdUseCase existsMemberByIdUseCase;
 
-    @GetMapping("/api/v1/members/exists/{memberId}")
+    @GetMapping("/internal/v1/members/exists/{memberId}")
     public ResponseEntity<Boolean> existsMemberById(@PathVariable String memberId) {
 
         boolean existsMember= existsMemberByIdUseCase.existsMemberById(memberId);

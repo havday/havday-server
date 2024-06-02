@@ -44,7 +44,7 @@ public class CreateOrderCommand extends SelfValidating<CreateOrderCommand> {
 		this.validateSelf();
 	}
 
-	public static CreateOrderCommand of(CreateOrderRequest request) {
+	public static CreateOrderCommand of(Long memberId,CreateOrderRequest request) {
 
 		if (request.productItems() == null) {
 			throw new IllegalArgumentException("상품들이 하나 이상 있어야 합니다.");
@@ -55,6 +55,6 @@ public class CreateOrderCommand extends SelfValidating<CreateOrderCommand> {
 				.map(ProductItemCommand::new)
 				.toList();
 
-		return new CreateOrderCommand(request.memberId(), request.addressId(), request.totalPrice(), request.isDeliveryFeeExists(), request.usedPoint(), request.paymentType(), productItemCommands);
+		return new CreateOrderCommand(memberId, request.addressId(), request.totalPrice(), request.isDeliveryFeeExists(), request.usedPoint(), request.paymentType(), productItemCommands);
 	}
 }

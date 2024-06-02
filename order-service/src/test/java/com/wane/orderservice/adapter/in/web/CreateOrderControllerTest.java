@@ -3,6 +3,7 @@ package com.wane.orderservice.adapter.in.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wane.orderservice.adapter.in.web.dto.request.CreateOrderRequest;
 import com.wane.orderservice.adapter.in.web.dto.request.ProductItemRequest;
+import com.wane.orderservice.adapter.in.web.external.CreateOrderController;
 import com.wane.orderservice.application.port.in.CreateOrderCommand;
 import com.wane.orderservice.application.port.in.CreateOrderUseCase;
 import com.wane.orderservice.domain.Order;
@@ -47,7 +48,7 @@ class CreateOrderControllerTest {
         ProductItemRequest productItem2 = new ProductItemRequest(3L, 2);
         ProductItemRequest productItem3 = new ProductItemRequest(4L, 100);
 
-        CreateOrderRequest request = new CreateOrderRequest(1L, 1L, 10000, true, 1000, "card", List.of(productItem1, productItem2, productItem3));
+        CreateOrderRequest request = new CreateOrderRequest( 1L, 10000, true, 1000, "card", List.of(productItem1, productItem2, productItem3));
         String id = "202405270000001";
 
         given(createOrderUseCase.createOrder(any(CreateOrderCommand.class)))
@@ -55,6 +56,7 @@ class CreateOrderControllerTest {
 
         //when
         ResultActions resultActions = mockMvc.perform(post("/api/v1/orders")
+                        .header("memberId", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andDo(print());
@@ -62,7 +64,6 @@ class CreateOrderControllerTest {
         resultActions.andExpect(status().isCreated())
                 .andDo(document("create-order",
                         requestFields(
-                                fieldWithPath("memberId").description("회원 ID"),
                                 fieldWithPath("addressId").description("주소 ID"),
                                 fieldWithPath("totalPrice").description("총 가격"),
                                 fieldWithPath("isDeliveryFeeExists").description("배송비 포함 여부"),

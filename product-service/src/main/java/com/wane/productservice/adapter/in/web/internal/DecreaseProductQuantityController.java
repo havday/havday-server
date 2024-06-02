@@ -1,4 +1,4 @@
-package com.wane.productservice.adapter.in.web;
+package com.wane.productservice.adapter.in.web.internal;
 
 import com.wane.productservice.adapter.in.web.dto.request.ProductIdAndDecreaseQuantity;
 import com.wane.productservice.application.port.in.DecreaseEachProductQuantityUseCase;
@@ -17,7 +17,7 @@ public class DecreaseProductQuantityController {
 
     private final DecreaseEachProductQuantityUseCase decreaseProductQuantityUseCase;
 
-    @PutMapping("/api/v1/products/decrease-quantity")
+    @PutMapping("/internal/v1/products/decrease-quantity")
     public ResponseEntity<Void> decreaseProductQuantity(
             @RequestBody List<ProductIdAndDecreaseQuantity> requestList
     ) {
