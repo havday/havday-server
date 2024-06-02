@@ -8,7 +8,7 @@ image:
   repository: wan2da/havday-server-delivery-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.2-SNAPSHOT"
+  tag: "0.0.4-SNAPSHOT"
 
 imagePullSecrets: [ ]
 nameOverride: ""
@@ -41,7 +41,9 @@ securityContext: { }
 
 env:
   - name: kafka.bootstrap-servers
-    value: kafka-service:9092
+    value: "kafka-service:9092"
+  - name: external.member-service.url
+    value: "http://member-service"
 
 service:
   type: ClusterIP

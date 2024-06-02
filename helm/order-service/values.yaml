@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: wan2da/havday-server-order-service
   pullPolicy: IfNotPresent
-  tag: "0.0.2-SNAPSHOT"
+  tag: "0.0.4-SNAPSHOT"
 imagePullSecrets: [ ]
 nameOverride: ""
 fullnameOverride: "order-service"
@@ -51,7 +51,7 @@ securityContext: { }
 
 env:
   - name: kafka.bootstrap.servers
-    value: "kafka-services:9092"
+    value: "kafka-service:9092"
   - name: external.product.service.url
     value: "http://product-service"
 

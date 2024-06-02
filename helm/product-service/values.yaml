@@ -8,7 +8,7 @@ image:
   repository: wan2da/havday-server-product-service
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.2-SNAPSHOT"
+  tag: "0.0.4-SNAPSHOT"
 
 imagePullSecrets: []
 nameOverride: ""

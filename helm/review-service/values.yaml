@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: wan2da/havday-server-review-service
   pullPolicy: IfNotPresent
-  tag: "0.0.2-SNAPSHOT"
+  tag: "0.0.4-SNAPSHOT"
 
 imagePullSecrets: []
 nameOverride: ""
