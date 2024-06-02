@@ -22,7 +22,6 @@ spring:
             - Path=/api/v1/jwt/test
             - Path=/api/v1/jwt/reissue
             - Path=/api/v1/oauth/**
-            - Path=/api/v1/no-auth/**
           filters:
             - name: LogPathFilter
         - id: delivery-service

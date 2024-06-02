@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Slf4j
 @RequiredArgsConstructor
 @Component
@@ -24,7 +26,10 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Object> {
     private final JwtTokenUtils jwtTokenUtils;
     private final ExistsMemberByIdAdapter existsMemberByIdAdapter;
 
-    private static final String NO_AUTH_URI = "no-auth";
+    private static final String API_TYPE_HEADER_NAME = "Api-Type";
+    private static final String NO_AUTH_HEADER_VALUE = "no-auth";
+    private static final String API_VERSION_PATH = "/api/v1";
+    private static final String NO_AUTH_CONTAIN_PATH = "/api/v1/no-auth";
 
     @Override
     public GatewayFilter apply(Object config) {
@@ -32,8 +37,12 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Object> {
             ServerHttpRequest request = exchange.getRequest();
             log.info("request information : {}", request.getURI());
 
-            if (request.getURI().getPath().contains(NO_AUTH_URI)) {
-                return chain.filter(exchange);
+            if (isApiTypeNoAuth(request)) {
+                String addNoAuthToPath = request.getPath().value().replace(API_VERSION_PATH, NO_AUTH_CONTAIN_PATH);
+
+                ServerWebExchange modifiedExchange = changePathToExchange(exchange, addNoAuthToPath);
+
+                return chain.filter(modifiedExchange);
             }
 
             if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
@@ -74,11 +83,31 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Object> {
                 return onError(exchange, ErrorCode.MEMBER_NOT_MATCH);
             }
 
-            exchange.getRequest().mutate().headers(httpHeaders -> httpHeaders.set("memberId", memberId));
+            ServerWebExchange modifiedExchange = addHeaderToExchange(exchange, memberId);
 
-            return chain.filter(exchange);
+            return chain.filter(modifiedExchange);
         });
 
+    }
+
+    private static ServerWebExchange changePathToExchange(ServerWebExchange exchange, String addNoAuthToPath) {
+        return exchange.mutate()
+                .request(exchange.getRequest().mutate()
+                        .path(addNoAuthToPath)
+                        .build())
+                .build();
+    }
+
+    private static ServerWebExchange addHeaderToExchange(ServerWebExchange exchange, String memberId) {
+        return exchange.mutate()
+                .request(exchange.getRequest().mutate()
+                        .header("memberId", memberId)
+                        .build())
+                .build();
+    }
+
+    private static boolean isApiTypeNoAuth(ServerHttpRequest request) {
+        return Objects.equals(request.getHeaders().getFirst(API_TYPE_HEADER_NAME), NO_AUTH_HEADER_VALUE);
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, ErrorCode errorCode) {

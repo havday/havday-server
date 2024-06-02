@@ -16,7 +16,7 @@ public class ExistsMemberByIdAdapter {
 
     public Boolean existsMemberById(String memberId) {
         return RestClient.builder()
-                .baseUrl(memberServiceUrl + "/api/v1/members/exists/" + memberId)
+                .baseUrl(memberServiceUrl + "/internal/v1/members/exists/" + memberId)
 //                .defaultStatusHandler(HttpStatusCode::is4xxClientError, (req, res) -> {
 //                    throw new CustomException(ErrorCode.MEMBER_NOT_MATCH);
 //                })
