@@ -32,3 +32,4 @@ for chart in "${charts[@]}"; do
 done
 
 echo "All charts installed successfully!"
+exit 0
