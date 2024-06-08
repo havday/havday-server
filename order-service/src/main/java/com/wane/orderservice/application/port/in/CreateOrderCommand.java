@@ -32,7 +32,7 @@ public class CreateOrderCommand extends SelfValidating<CreateOrderCommand> {
 	@NotEmpty(message = "상품들이 하나 이상 있어야 합니다.")
 	private List<ProductItemCommand> productItemCommands;
 
-	private CreateOrderCommand(Long memberId, Long addressId, int totalPrice, boolean isDeliveryFeeExists, int usedPoint, String paymentType, List<ProductItemCommand> productItemCommands) {
+	public CreateOrderCommand(Long memberId, Long addressId, int totalPrice, boolean isDeliveryFeeExists, int usedPoint, String paymentType, List<ProductItemCommand> productItemCommands) {
 		this.memberId = memberId;
 		this.addressId = addressId;
 		this.totalPrice = totalPrice;
