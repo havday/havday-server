@@ -1,0 +1,31 @@
+
+spring:
+  application:
+    name: delivery-service
+  profiles:
+    default: local
+
+kafka:
+  bootstrap-servers: localhost:9092
+external:
+  member-service.url: http://localhost:8080
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  h2:
+    console:
+      enabled: true
