@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @RequiredArgsConstructor
 @Repository
-public class GetMemberByAuthAndOauthTypePort implements GetMemberByAuthIdAndOauthTypePort {
+public class GetMemberByAuthAndOauthTypeAdapter implements GetMemberByAuthIdAndOauthTypePort {
 
 	private final MemberJpaEntityRepository memberRepository;
 	private final MemberMapper memberMapper;
