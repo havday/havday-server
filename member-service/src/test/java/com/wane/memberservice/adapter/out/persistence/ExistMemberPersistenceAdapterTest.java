@@ -26,6 +26,11 @@ class ExistMemberPersistenceAdapterTest {
     @Autowired
     private MemberJpaEntityRepository repository;
 
+    @BeforeEach
+    void setUp() {
+        repository.deleteAll();
+    }
+
     @DisplayName("회원이 존재하는지 id 로 확인한다.")
     @Test
     void existMemberByMemberId() {
