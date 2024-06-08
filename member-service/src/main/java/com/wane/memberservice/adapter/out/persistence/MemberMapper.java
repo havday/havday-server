@@ -22,7 +22,7 @@ public class MemberMapper {
                 jpaEntity.getAuthServiceType(),
                 jpaEntity.getMemberRole(),
                 jpaEntity.getAuthId(),
-                jpaEntity.getAddresses().stream().map(this::toDomainEntity).collect(Collectors.toList())
+                jpaEntity.getAddresses()== null ? null : jpaEntity.getAddresses().stream().map(this::toDomainEntity).collect(Collectors.toList())
         );
     }
 

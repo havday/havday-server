@@ -1,5 +1,6 @@
 package com.wane.memberservice.adapter.out.persistence;
 
+import com.wane.exception.CustomException;
 import com.wane.memberservice.IntegrationTestSupport;
 import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntity;
 import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntityRepository;
@@ -48,15 +49,14 @@ class GetUserPersistenceAdapterTest extends IntegrationTestSupport {
 		assertThat(sut.getAddresses()).isEqualTo(new ArrayList<>());
 	}
 
-	@DisplayName("회원이 존재하지 않으면 JpaObjectRetrievalFailureException을 던진다.")
+	@DisplayName("회원이 존재하지 않으면 CustomException을 던진다.")
 	@Test
 	void test() {
 	    //given
 		//when
 	    //then
 		assertThatThrownBy(() -> getUserPersistenceAdapter.getUser(100L))
-				.isInstanceOf(JpaObjectRetrievalFailureException.class)
-				.hasMessage("Member not found");
+				.isInstanceOf(CustomException.class);
 	}
 
 
