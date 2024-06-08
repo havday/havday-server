@@ -12,4 +12,4 @@ configMapGenerator:
     literals:
       - server.insecure=true
 
-namespace: argocd
+namespace: argo-cd
