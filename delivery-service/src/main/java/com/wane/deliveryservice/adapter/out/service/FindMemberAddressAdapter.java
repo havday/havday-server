@@ -5,7 +5,9 @@ import com.wane.deliveryservice.application.port.out.MemberAddress;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClient;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @RequiredArgsConstructor
 @Component
@@ -14,19 +16,15 @@ public class FindMemberAddressAdapter implements FindMemberAddressPort {
     @Value("${external.member-service.url}")
     private String memberServiceUrl;
 
+    private final CommonRestClient restClient;
+
     @Override
     public MemberAddress findMemberAddress(Long memberId, Long addressId) {
-        return RestClient.create().get()
-                .uri(uriBuilder -> uriBuilder
-                        .scheme("http")
-                        .host(memberServiceUrl)
-                        .port("8080")
-                        .path("/internal/v1/members/address/")
-                        .queryParam("memberId", memberId)
-                        .queryParam("addressId", addressId)
-                        .build()
-                )
-                .retrieve()
-                .body(MemberAddress.class);
+        try {
+            URI uri = new URI("http", memberServiceUrl, "/internal/v1/members/address", "memberId=" + memberId + "&addressId=" + addressId, null);
+            return (MemberAddress) restClient.sendGetMethod(uri, MemberAddress.class);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
