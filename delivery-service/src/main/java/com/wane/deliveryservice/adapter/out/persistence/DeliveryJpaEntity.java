@@ -2,11 +2,9 @@ package com.wane.deliveryservice.adapter.out.persistence;
 
 import com.wane.deliveryservice.domain.DeliveryStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
