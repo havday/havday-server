@@ -5,6 +5,7 @@ import com.wane.memberservice.adapter.out.persistence.jpa.MemberJpaEntityReposit
 import com.wane.memberservice.domain.AuthServiceType;
 import com.wane.memberservice.domain.MemberRole;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,16 +27,11 @@ class ExistMemberPersistenceAdapterTest {
     @Autowired
     private MemberJpaEntityRepository repository;
 
-    @BeforeEach
-    void setUp() {
-        repository.deleteAll();
-    }
-
     @DisplayName("회원이 존재하는지 id 로 확인한다.")
     @Test
     void existMemberByMemberId() {
         //given
-        MemberJpaEntity member = new MemberJpaEntity(1L, "박재완", "wan2daaa@gmail.com", "1234", "phoneNumber", 10000, AuthServiceType.KAKAO, MemberRole.USER, null, "");
+        MemberJpaEntity member = new MemberJpaEntity("박재완", "wan2daaa@gmail.com", "1234", "phoneNumber", 10000, AuthServiceType.KAKAO, MemberRole.USER, "");
         repository.save(member);
 
         //when
